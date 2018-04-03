@@ -7,6 +7,9 @@ module.exports = {
     "browser": true
   },
   "rules": {
+    "quotes": 0,
+    "spaced-comment": 0,
+    "react/forbid-prop-types": 0,
     "jsx-a11y/anchor-is-valid": [
       "error",
       {
