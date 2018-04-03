@@ -81,19 +81,6 @@ SimpleCard.propTypes = {
 
 const styledComponent = withStyles(styles)(SimpleCard);
 
-// const propTypes = {
-//   changePage: PropTypes.func.isRequired,
-// };
-
-// const Home = props => (
-//   <div>
-//     <h1>Home</h1>
-//     <p>Welcome home!</p>
-//     <button onClick={() => props.changePage()}>Go to about page via redux</button>
-//   </div>
-// );
-// Home.propTypes = propTypes;
-
 const mapDispatchToProps = dispatch => bindActionCreators({
   signUp: () => push('/sign-up'),
   login: () => push('/login'),

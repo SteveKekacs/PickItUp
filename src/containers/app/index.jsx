@@ -1,7 +1,7 @@
 // eslint jsx-a11y/anchor-is-valid: 0
 import React from 'react';
 import { Route, Link } from 'react-router-dom';
-import Home from '../home';
+import LoginPage from '../login-page';
 import About from '../about';
 
 // TODO: make it so if this isn't rendered (on GHPages force a timeout so that
@@ -14,7 +14,7 @@ const App = () => (
   <div>
 
     <main>
-      <Route exact path="/" component={Home} />
+      <Route exact path="/" component={LoginPage} />
       <Route exact path="/about-us" component={About} />
     </main>
   </div>
