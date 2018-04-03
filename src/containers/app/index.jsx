@@ -4,6 +4,8 @@ import { Route, Link } from 'react-router-dom';
 import Home from '../home';
 import About from '../about';
 
+// TODO: make it so if this isn't rendered (on GHPages force a timeout so that
+// it clicks the home link (HACK)
 const App = () => (
   <div>
     <header>
