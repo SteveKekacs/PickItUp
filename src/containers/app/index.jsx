@@ -9,6 +9,10 @@ import LoginPage from '../login-page';
 import AppMenu from '../menu';
 import MainMap from '../main-map';
 import About from '../about';
+import Profile from '../profile';
+import Friends from '../friends';
+import Rewards from '../rewards';
+import Settings from '../settings';
 
 // TODO: make it so if this isn't rendered (on GHPages force a timeout so that
 // it clicks the home link (HACK)
@@ -18,10 +22,6 @@ import About from '../about';
 // </header>
 
 const topAppHeight = 56;
-
-const propTypes = {
-  page: PropTypes.string.isRequired,
-};
 
 const mapStateToProps = state => ({
   page: state.routing.location.pathname,
@@ -49,10 +49,10 @@ function App(props) {
         <Route exact path="/" component={LoginPage} />
         <Grid container spacing={8} className={classes.mainGrid}>
           <Route exact path="/home" component={MainMap} />
-          <Route exact path="/profile" component={About} />
-          <Route exact path="/friends" component={About} />
-          <Route exact path="/rewards" component={About} />
-          <Route exact path="/settings" component={About} />
+          <Route exact path="/profile" component={Profile} />
+          <Route exact path="/friends" component={Friends} />
+          <Route exact path="/rewards" component={Rewards} />
+          <Route exact path="/settings" component={Settings} />
           <Route exact path="/about-us" component={About} />
         </Grid>
       </div>
