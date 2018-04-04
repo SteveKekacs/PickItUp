@@ -3,6 +3,7 @@ import React from 'react';
 import { withStyles } from 'material-ui/styles';
 import FakeMap from '../../images/HarvardScreenshot.png';
 import SportIcon from './SportIcon';
+import HostGameButton from './HostGameButton';
 
 // TODO: Make the icons their own components
 
@@ -18,6 +19,7 @@ function MainMap() {
       <SportIcon styling={{ top: "200px", right: "40px" }} />
       <SportIcon styling={{ bottom: "60px", left: "60px" }} />
       <SportIcon styling={{ bottom: "315px", left: "20px" }} />
+      <HostGameButton />
     </div>
   );
 }

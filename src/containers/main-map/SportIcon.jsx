@@ -63,6 +63,7 @@ class SportIcon extends React.Component {
             <DialogContentText id="alert-dialog-description">
               There are currently 3 players and 2 more are needed.
               The game starts at 6:30pm and will go until 8:30pm.
+              [TODO: Style this]
             </DialogContentText>
           </DialogContent>
           <DialogActions>
