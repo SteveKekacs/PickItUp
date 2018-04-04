@@ -13,34 +13,31 @@ const styles = theme => ({
   },
 });
 
-const InGameScreen = props => (
+const SignUpPage = props => (
   <Grid item xs={12} >
     <Paper className={props.classes.paper}>
-      <h1>Basketball Game with Manav</h1>
+      <h1>Sign Up</h1>
       <p>
-        This is where you see details about your game like the time, players, location, chat...
+        [Outline] This is the page where you will sign up for the application.
       </p>
-      <p>Scheduled Start: 6:30pm</p>
-      <p>Duration: 45 minutes</p>
-      <p>Skill Level: Advanced</p>
-      <p>Players: Ty Rocca, Jeff Smith, Simi Jones, and Blake Willson</p>
-      <p>[Message the Administrator]</p>
+      <p>Below you will enter your basic info</p>
+      <p>Name: [John Smith]</p>
+      <p>Sports: [Basketball, Football]</p>
       <Button
         fullWidth
-        onClick={() => props.gotoPostGame()}
+        onClick={() => props.gotoMainMap()}
         variant="raised"
         color="primary"
       >
-        Finish Game
+        Finish Sign Up
       </Button>
     </Paper>
   </Grid>
 );
 
-InGameScreen.propTypes = {
+SignUpPage.propTypes = {
   classes: PropTypes.object.isRequired,
-  gotoPostGame: PropTypes.func.isRequired,
+  gotoMainMap: PropTypes.func.isRequired,
 };
 
-export default withStyles(styles)(InGameScreen);
-
+export default withStyles(styles)(SignUpPage);
