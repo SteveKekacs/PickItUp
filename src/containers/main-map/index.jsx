@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import FakeMap from '../../images/HarvardScreenshot.png'
+import Basketball from '../../images/basketball.png'
 
 
 function MainMap() {
@@ -14,7 +15,7 @@ function MainMap() {
       backgroundPosition: "-430px",
     }}>
     <img
-      src="http://www.opnlttr.com/sites/default/files/448650-basketball_mario_sports_mix_.png"
+      src={Basketball}
       style={{
         height: "20px",
         position: "absolute",
@@ -23,7 +24,7 @@ function MainMap() {
       }}
     />
     <img
-      src="http://www.opnlttr.com/sites/default/files/448650-basketball_mario_sports_mix_.png"
+      src={Basketball}
       style={{
         height: "20px",
         position: "absolute",
@@ -32,7 +33,7 @@ function MainMap() {
       }}
     />
     <img
-      src="http://www.opnlttr.com/sites/default/files/448650-basketball_mario_sports_mix_.png"
+      src={Basketball}
       style={{
         height: "20px",
         position: "absolute",
