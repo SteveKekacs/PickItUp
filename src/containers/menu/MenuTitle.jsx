@@ -13,13 +13,14 @@ function MenuTitle(props) {
   const { classes } = props;
   return (
     <Typography variant="title" color="inherit" className={classes.flex}>
-      Main Map
+      {props.pageName}
     </Typography>
   );
 }
 
 MenuTitle.propTypes = {
   classes: PropTypes.object.isRequired,
+  pageName: PropTypes.string.isRequired,
 };
 
 export default withStyles(styles)(MenuTitle);

@@ -25,13 +25,16 @@ const mapStateToProps = state => ({
 const App = props => (
   <div>
     <main>
-      {props.page !== "/" && <AppMenu />}
       <Route exact path="/" component={LoginPage} />
-      <Route exact path="/about-us" component={About} />
+      {props.page !== "/" && <AppMenu />}
+
     </main>
   </div>
 );
 App.propTypes = propTypes;
+      // <Route exact path="/about-us" component={About} />
+      // <Route exact path="/profile" component={Profile} />
+      // <Route exact path="/home" component={MainMap} />
 
 // Connection
 export default connect(

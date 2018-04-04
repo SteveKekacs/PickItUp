@@ -16,7 +16,7 @@ import * as globalActionCreators from '../../action-creators/global-actions';
  * Mapped Title
  *************************************************************************************************/
 const mapStateToPropsTitle = state => ({
-  page: UrlMapping[state.routing.location.pathname],
+  pageName: UrlMapping[state.routing.location.pathname],
 });
 
 const ConnectedMenuTitle = connect(
