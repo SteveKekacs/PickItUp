@@ -23,17 +23,30 @@ class MenuDropdown extends React.Component {
     this.state = {
       anchorEl: null,
     };
+
     this.handleClick = this.handleClick.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.gotoMainMap = this.handleClose(this.props.gotoMainMap);
+    this.gotoProfile = this.handleClose(this.props.gotoProfile);
+    this.gotoFriends = this.handleClose(this.props.gotoFriends);
+    this.gotoRewards = this.handleClose(this.props.gotoRewards);
+    this.gotoSettings = this.handleClose(this.props.gotoSettings);
+    this.gotoLogout = this.handleClose(this.props.gotoLogout);
   }
 
   handleClick(event) {
     this.setState({ anchorEl: event.currentTarget });
   }
 
-  handleClose() {
-    this.setState({ anchorEl: null });
+  handleClose(func) {
+    return () => {
+      this.setState({ anchorEl: null });
+      if (func !== null) {
+        func();
+      }
+    };
   }
+
 
   render() {
     const { classes } = this.props;
@@ -55,29 +68,29 @@ class MenuDropdown extends React.Component {
           id="simple-menu"
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
-          onClose={this.handleClose}
+          onClose={this.handleClose(null)}
         >
-          <MenuItem onClick={this.handleClose}>
+          <MenuItem onClick={this.gotoMainMap}>
             <Icon className={classes.icons}>map</Icon>
             Main Map
           </MenuItem>
-          <MenuItem onClick={this.handleClose}>
+          <MenuItem onClick={this.gotoProfile}>
             <Icon className={classes.icons}>account_circle</Icon>
             Profile
           </MenuItem>
-          <MenuItem onClick={this.handleClose}>
+          <MenuItem onClick={this.gotoFriends}>
             <Icon className={classes.icons}>group</Icon>
             Friends
           </MenuItem>
-          <MenuItem onClick={this.handleClose}>
+          <MenuItem onClick={this.gotoRewards}>
             <Icon className={classes.icons}>card_giftcard</Icon>
             Rewards
           </MenuItem>
-          <MenuItem onClick={this.handleClose}>
+          <MenuItem onClick={this.gotoSettings}>
             <Icon className={classes.icons}>settings</Icon>
             Settings
           </MenuItem>
-          <MenuItem onClick={this.handleClose}>
+          <MenuItem onClick={this.gotoLogout}>
             <Icon className={classes.icons}>exit_to_app</Icon>
             Logout
           </MenuItem>
@@ -89,6 +102,12 @@ class MenuDropdown extends React.Component {
 
 MenuDropdown.propTypes = {
   classes: PropTypes.object.isRequired,
+  gotoMainMap: PropTypes.func.isRequired,
+  gotoProfile: PropTypes.func.isRequired,
+  gotoFriends: PropTypes.func.isRequired,
+  gotoRewards: PropTypes.func.isRequired,
+  gotoSettings: PropTypes.func.isRequired,
+  gotoLogout: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(MenuDropdown);
