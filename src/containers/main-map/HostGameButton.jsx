@@ -48,7 +48,7 @@ class HostGameButton extends React.Component {
   }
 
   handleChange(name) {
-    return event => this.setState({ [name]: Number(event.target.value) });
+    return event => this.setState({ [name]: event.target.value });
   }
 
   handleClickOpen() {
