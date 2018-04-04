@@ -24,6 +24,7 @@ class MenuDropdown extends React.Component {
       anchorEl: null,
     };
 
+    this.eltId = "menu-dropdown";
     this.handleClick = this.handleClick.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.gotoMainMap = this.handleClose(this.props.gotoMainMap);
@@ -47,7 +48,6 @@ class MenuDropdown extends React.Component {
     };
   }
 
-
   render() {
     const { classes } = this.props;
     const { anchorEl } = this.state;
@@ -58,14 +58,14 @@ class MenuDropdown extends React.Component {
           className={classes.menuButton}
           color="inherit"
           aria-label="Menu"
-          aria-owns={anchorEl ? 'simple-menu' : null}
+          aria-owns={anchorEl ? this.eltId : null}
           aria-haspopup="true"
           onClick={this.handleClick}
         >
           <MenuIcon />
         </IconButton>
         <Menu
-          id="simple-menu"
+          id={this.eltId}
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
           onClose={this.handleClose(null)}

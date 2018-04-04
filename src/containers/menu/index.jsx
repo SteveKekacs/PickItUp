@@ -52,7 +52,7 @@ const styles = {
     flexGrow: 1,
   },
 };
-function ButtonAppBar(props) {
+function MainAppBar(props) {
   const { classes } = props;
   return (
     <div className={classes.root}>
@@ -60,15 +60,25 @@ function ButtonAppBar(props) {
         <Toolbar>
           <ConnectedMenuDropdown />
           <ConnectedMenuTitle />
-          <MenuFilter />
+          {props.showFilter && <MenuFilter />}
         </Toolbar>
       </AppBar>
     </div>
   );
 }
 
-ButtonAppBar.propTypes = {
+MainAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
+  showFilter: PropTypes.bool.isRequired,
 };
 
-export default withStyles(styles)(ButtonAppBar);
+const mapStateToPropsAppBar = state => ({
+  showFilter: state.routing.location.pathname === "/home",
+});
+
+const ConnectedAppBar = connect(
+  mapStateToPropsAppBar,
+  null,
+)(MainAppBar);
+
+export default withStyles(styles)(ConnectedAppBar);

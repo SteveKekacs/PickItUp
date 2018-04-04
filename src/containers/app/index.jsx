@@ -25,10 +25,7 @@ const mapStateToProps = state => ({
 const App = props => (
   <div>
     <main>
-      {props.page !== "/"
-          ? <AppMenu />
-          : null
-      }
+      {props.page !== "/" && <AppMenu />}
       <Route exact path="/" component={LoginPage} />
       <Route exact path="/about-us" component={About} />
     </main>
