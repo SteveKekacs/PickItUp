@@ -8,7 +8,6 @@ import store, { history } from './store';
 import App from './containers/app';
 import './index.css';
 
-
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
