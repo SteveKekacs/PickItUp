@@ -1,22 +1,72 @@
 // eslint jsx-a11y/anchor-is-valid: 0
 import React from 'react';
-import { Route, Link } from 'react-router-dom';
-import Home from '../home';
+import PropTypes from 'prop-types';
+import { Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { withStyles } from 'material-ui/styles';
+import Grid from 'material-ui/Grid';
+import LoginPage from '../login-page';
+import AppMenu from '../menu';
+import MainMap from '../main-map';
 import About from '../about';
+import Profile from '../profile';
+import Friends from '../friends';
+import Rewards from '../rewards';
+import Settings from '../settings';
 
 // TODO: make it so if this isn't rendered (on GHPages force a timeout so that
 // it clicks the home link (HACK)
-const App = () => (
-  <div>
-    <header>
-      <Link to="/">Home</Link>
-      <Link to="/about-us">About</Link>
-    </header>
+// <header>
+//   <Link to="/">Login</Link>
+//   <Link to="/about-us">About</Link>
+// </header>
 
+const topAppHeight = 56;
+
+const mapStateToProps = state => ({
+  page: state.routing.location.pathname,
+});
+
+const styles = {
+  root: {
+    flexGrow: 1,
+    overflow: "hidden",
+    height: "100vh",
+  },
+  mainGrid: {
+    marginTop: "1px",
+    overflowY: "scroll",
+    height: `calc(100vh - ${topAppHeight}px)`,
+  },
+};
+
+function App(props) {
+  const { classes } = props;
+  return (
     <main>
-      <Route exact path="/" component={Home} />
-      <Route exact path="/about-us" component={About} />
+      <div className={classes.root}>
+        {props.page !== "/" && <AppMenu />}
+        <Route exact path="/" component={LoginPage} />
+        <Grid container spacing={8} className={classes.mainGrid}>
+          <Route exact path="/home" component={MainMap} />
+          <Route exact path="/profile" component={Profile} />
+          <Route exact path="/friends" component={Friends} />
+          <Route exact path="/rewards" component={Rewards} />
+          <Route exact path="/settings" component={Settings} />
+          <Route exact path="/about-us" component={About} />
+        </Grid>
+      </div>
     </main>
-  </div>
-);
-export default App;
+  );
+}
+App.propTypes = {
+  classes: PropTypes.object.isRequired,
+  page: PropTypes.string.isRequired,
+};
+
+// Connection
+export default connect(
+  mapStateToProps,
+  null,
+)(withStyles(styles)(App));
+
