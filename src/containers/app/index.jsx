@@ -13,6 +13,9 @@ import Profile from '../profile';
 import Friends from '../friends';
 import Rewards from '../rewards';
 import Settings from '../settings';
+import SignUpPage from '../sign-up';
+import PostGamePage from '../post-game';
+import InGameScreen from '../in-game';
 
 // TODO: make it so if this isn't rendered (on GHPages force a timeout so that
 // it clicks the home link (HACK)
@@ -48,7 +51,10 @@ function App(props) {
         {props.page !== "/" && <AppMenu />}
         <Route exact path="/" component={LoginPage} />
         <Grid container spacing={8} className={classes.mainGrid}>
+          <Route exact path="/signup" component={SignUpPage} />
           <Route exact path="/home" component={MainMap} />
+          <Route exact path="/ingame" component={InGameScreen} />
+          <Route exact path="/postgame" component={PostGamePage} />
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/friends" component={Friends} />
           <Route exact path="/rewards" component={Rewards} />

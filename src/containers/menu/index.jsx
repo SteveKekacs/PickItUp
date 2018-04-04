@@ -58,7 +58,7 @@ function MainAppBar(props) {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <ConnectedMenuDropdown />
+          {props.showDropdown && <ConnectedMenuDropdown />}
           <ConnectedMenuTitle />
           {props.showFilter && <MenuFilter />}
         </Toolbar>
@@ -70,10 +70,12 @@ function MainAppBar(props) {
 MainAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
   showFilter: PropTypes.bool.isRequired,
+  showDropdown: PropTypes.bool.isRequired,
 };
 
 const mapStateToPropsAppBar = state => ({
   showFilter: state.routing.location.pathname === "/home",
+  showDropdown: state.routing.location.pathname !== "/signup",
 });
 
 const ConnectedAppBar = connect(

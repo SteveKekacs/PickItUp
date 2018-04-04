@@ -45,10 +45,11 @@ class HostGameButton extends React.Component {
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.hostGame = this.hostGame.bind(this);
   }
 
   handleChange(name) {
-    return event => this.setState({ [name]: Number(event.target.value) });
+    return event => this.setState({ [name]: event.target.value });
   }
 
   handleClickOpen() {
@@ -57,6 +58,11 @@ class HostGameButton extends React.Component {
 
   handleClose() {
     this.setState({ open: false });
+  }
+
+  hostGame() {
+    this.handleClose();
+    this.props.gotoCurrentGame();
   }
 
   render() {
@@ -128,7 +134,7 @@ class HostGameButton extends React.Component {
                   onChange={this.handleChange('duration')}
                   input={<Input id="sport-duration" />}
                 >
-                  <option value="" onClick={this.handleChange('duration')}/>
+                  <option value="" onClick={this.handleChange('duration')} />
                   <option value="30" onClick={this.handleChange('duration')}>
                     30 minutes
                   </option>
@@ -152,7 +158,7 @@ class HostGameButton extends React.Component {
             <Button variant="raised" onClick={this.handleClose} color="default">
               Cancel
             </Button>
-            <Button variant="raised" onClick={this.handleClose} color="primary" autoFocus>
+            <Button variant="raised" onClick={this.hostGame} color="primary" autoFocus>
               Host Game
             </Button>
           </DialogActions>
@@ -164,6 +170,7 @@ class HostGameButton extends React.Component {
 
 HostGameButton.propTypes = {
   classes: PropTypes.object.isRequired,
+  gotoCurrentGame: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(HostGameButton);

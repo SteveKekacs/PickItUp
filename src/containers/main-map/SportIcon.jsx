@@ -27,6 +27,7 @@ class SportIcon extends React.Component {
     };
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleJoinGame = this.handleJoinGame.bind(this);
   }
 
   handleClickOpen() {
@@ -35,6 +36,11 @@ class SportIcon extends React.Component {
 
   handleClose() {
     this.setState({ open: false });
+  }
+
+  handleJoinGame() {
+    this.handleClose();
+    this.props.gotoCurrentGame();
   }
 
   render() {
@@ -70,7 +76,7 @@ class SportIcon extends React.Component {
             <Button variant="raised" onClick={this.handleClose} color="default">
               Cancel
             </Button>
-            <Button variant="raised" onClick={this.handleClose} color="primary" autoFocus>
+            <Button variant="raised" onClick={this.handleJoinGame} color="primary" autoFocus>
               Join Game
             </Button>
           </DialogActions>
@@ -83,6 +89,7 @@ class SportIcon extends React.Component {
 SportIcon.propTypes = {
   classes: PropTypes.object.isRequired,
   styling: PropTypes.object.isRequired,
+  gotoCurrentGame: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(SportIcon);
