@@ -7,15 +7,15 @@ import Menu, { MenuItem } from 'material-ui/Menu';
 import MenuIcon from 'material-ui-icons/Menu';
 import Icon from 'material-ui/Icon';
 
-const styles = {
+const styles = theme => ({
   menuButton: {
     marginLeft: -12,
     marginRight: 20,
   },
   icons: {
-    paddingRight: 5,
+    paddingRight: theme.spacing.unit,
   },
-};
+});
 
 class MenuDropdown extends React.Component {
   constructor(props) {
