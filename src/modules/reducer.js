@@ -29,15 +29,15 @@ export function users(state = initState, action) {
         case actionTypes.GET_USER_INFO:
             // TODO: FIX THIS!!!
             // given a user id get all info, including activities
-            const userId = action.userId;
+            const userId = parseInt(action.userId);
 
             // get basic user info
             state = state.set('userInfo', state.get('users').find((obj) => obj.get('id') === userId));
 
-            // now get activities
-            const past_activities = state.get('allActivities').toJS().filter((obj) => obj.playerIds.includes(userId));
+            // // now get activities
+            const pastActivities = state.get('allActivities').toJS().filter((obj) => obj.playerIds.includes(userId));
 
-            return state.setIn(['userInfo', 'pastActivities'], List(past_activities))
+            return state.setIn(['userInfo', 'pastActivities'], List(pastActivities))
         default:
             return state;
     }

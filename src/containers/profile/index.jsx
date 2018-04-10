@@ -15,6 +15,10 @@ const styles = theme => ({
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
+  subtext: {
+    textAlign: 'center',
+    color: theme.palette.text.primary
+  }
 });
 
 class Profile extends React.Component {
@@ -30,9 +34,15 @@ class Profile extends React.Component {
     return (
       <Grid item xs={12} >
         <Paper className={this.props.classes.paper}>
-          <h1>John Stevens</h1>
-          <p>This is where stats, a bio, etc will be listed</p>
+          <h1>{this.props.userInfo.first_name} {this.props.userInfo.last_name}</h1>
+          <h2>{this.props.userInfo.age}</h2>
+          <p>{this.props.userInfo.bio}</p>
         </Paper>
+        { this.props.userInfo.pastActivities && (
+            <h2 className={this.props.classes.subtext}>
+              {this.props.userInfo.pastActivities.length} Activities
+            </h2>)
+        }
       </Grid>
   )}
 };
