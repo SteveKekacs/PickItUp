@@ -6,6 +6,7 @@ import Typography from 'material-ui/Typography';
 const styles = {
   flex: {
     flex: 1,
+    "text-align": "center"
   },
 };
 

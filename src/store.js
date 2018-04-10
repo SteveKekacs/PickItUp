@@ -10,7 +10,11 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 // const hist = createHistory({ basename: '/user' })
 export const history = createHistory({ basename: process.env.PUBLIC_URL });
 
-const initialState = {};
+const initialState = {
+  selectedSports: ["all"],
+  selectedLevels: ["all"]
+};
+
 const enhancers = [];
 const middleware = [
   thunk,

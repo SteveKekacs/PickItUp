@@ -15,6 +15,7 @@ export const sportsList = [
 ];
 
 export const sportToFilter = {
+  All: "all_sports",
   Baseball: "baseball",
   Basketball: "basketball",
   Boxing: "boxing",
@@ -30,3 +31,9 @@ export const sportToFilter = {
   Volleyball: "volleyball",
 };
 
+export const skillLevels = {
+  All: "all_levels",
+  Beginner: "beginner",
+  Intermediate: "intermediate",
+  Advanced: "advanced"
+};

@@ -13,7 +13,7 @@ import { FormControl } from 'material-ui/Form';
 import Select from 'material-ui/Select';
 import Input, { InputLabel } from 'material-ui/Input';
 import TextField from 'material-ui/TextField';
-import { sportToFilter } from '../../utils/sports';
+import { sportToFilter } from '../../utils/constants';
 
 // TODO: Make the icons their own components
 // use styles!!!!

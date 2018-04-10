@@ -2,10 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Menu, { MenuItem } from 'material-ui/Menu';
+import Select from 'material-ui/Select'
+import { FormControl, FormHelperText } from 'material-ui/Form';
+import Input, { InputLabel } from 'material-ui/Input';
 import IconButton from 'material-ui/IconButton';
 import Icon from 'material-ui/Icon';
-import { sportToFilter } from '../../utils/sports';
 
+// connecting to store
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+import { sportToFilter, skillLevels } from '../../utils/constants';
+
+import * as FilterActions from '../../action-creators/filter-actions'
 // TODO make filter do something
 
 const styles = {
@@ -19,13 +28,12 @@ class MenuFilter extends React.Component {
     super(props);
 
     this.state = {
-      anchorEl: null,
+      anchorEl: null
     };
 
     this.eltId = "menu-filter";
     this.handleClick = this.handleClick.bind(this);
     this.handleClose = this.handleClose.bind(this);
-    this.filterSports = this.filterSports.bind(this);
   }
 
   handleClick(event) {
@@ -34,13 +42,6 @@ class MenuFilter extends React.Component {
 
   handleClose() {
     this.setState({ anchorEl: null });
-  }
-
-  filterSports(sport) {
-    return () => {
-      this.handleClose();
-      console.log(`Filter ${sport}`);
-    };
   }
 
   render() {
@@ -56,7 +57,7 @@ class MenuFilter extends React.Component {
           aria-haspopup="true"
           onClick={this.handleClick}
         >
-          <Icon>search</Icon>
+          <Icon>filter_list</Icon>
         </IconButton>
 
         <Menu
@@ -65,25 +66,78 @@ class MenuFilter extends React.Component {
           open={Boolean(anchorEl)}
           onClose={this.handleClose}
         >
+
           <MenuItem onClick={this.gotoMainMap}>
-            <Icon className={classes.icons}>all_out</Icon>
-            View All Sports
+            <Icon className={classes.icons}>filter_list</Icon>
+            Filter Activities
           </MenuItem>
-          { Object.entries(sportToFilter).map(([sportName, sportSlug]) => (
-            <MenuItem key={sportSlug} onClick={this.filterSports(sportSlug)}>
-              {sportName}
-            </MenuItem>
-          ))}
+          
+          <FormControl>
+            <InputLabel htmlFor="sport-filter">Sports</InputLabel>
+            <Select 
+              native
+              value={this.props.selectedSports}
+              multiple={true} 
+              onChange={(event) => this.props.filterActivities(event.target.value, this.props.selectedLevels)}
+              inputProps={{
+                id: "sport-filter"
+              }}
+            >
+              { Object.entries(sportToFilter).map((sportInfo) => {
+                return (<option value={ sportInfo[1] }>{ sportInfo[0] }</option>);
+              }
+              )}
+            </Select>
+          </FormControl>
+
+          <FormControl>
+            <InputLabel htmlFor="level-filter">Skill Level</InputLabel>
+            <Select 
+              native
+              value={this.props.selectedLevels}
+              multiple={true} 
+              onChange={(event) => this.props.filterActivities(this.props.selectedSports, event.target.value)}
+              inputProps={{
+                id: "level-filter"
+              }}
+            >
+              { Object.entries(skillLevels).map((levelInfo) => {
+                return (<option value={ levelInfo[1] }>{ levelInfo[0] }</option>);
+              }
+              )}
+            </Select>
+          </FormControl>
 
         </Menu>
 
       </div>
     );
-  }
-}
-
-MenuFilter.propTypes = {
-  classes: PropTypes.object.isRequired,
+  };
 };
 
-export default withStyles(styles)(MenuFilter);
+MenuFilter.propTypes = {
+  classes: PropTypes.object.isRequired,  
+  selectedSports: PropTypes.array.isRequired,
+  selectedLevels: PropTypes.array.isRequired,
+  filterActivities: PropTypes.func.isRequired
+};
+
+function mapStateToProps(state) {
+  return {
+    selectedSports: state.selectedSports,
+    selectedLevels: state.selectedLevels
+  };
+};
+
+function mapDispatchToProps(dispatch) {
+  return {
+    filterActivities: bindActionCreators(FilterActions.filterActivities, dispatch)
+  };
+};
+
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(MenuFilter));
+

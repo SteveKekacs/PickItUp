@@ -52,6 +52,7 @@ const styles = {
     flexGrow: 1,
   },
 };
+
 function MainAppBar(props) {
   const { classes } = props;
   return (

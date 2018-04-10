@@ -1,6 +1,6 @@
 export default {
   "/": "Login Page",
-  "/home": "Browse Activities",
+  "/home": "PickItUp",
   "/profile": "Your Profile",
   "/friends": "Your Friends",
   "/rewards": "Your Rewards",
