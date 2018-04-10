@@ -13,21 +13,27 @@ class LeafletMap extends React.Component {
     super(props);
     this.state = { ...defaultCoords };
     this.onLocationFound = this.onLocationFound.bind(this);
+    this.onClick = this.onClick.bind(this);
   }
 
   componentDidMount() {
     // TODO: make it so the 'did mount' actually does mount
-    this._map.leafletElement.locate({
-      setView: true,
-      maxZoom: 16,
-    });
+    // this._map.leafletElement.locate({
+    //   setView: true,
+    //   maxZoom: 16,
+    // });
+    // setTimeout(this.props.gotoGame, 5000);
   }
 
   onLocationFound(e) {
-    this.setState({
-      lat: e.latitude,
-      lng: e.longitude,
-    });
+    // this.setState({
+    //   lat: e.latitude,
+    //   lng: e.longitude,
+    // });
+  }
+
+  onClick() {
+    this.props.gotoGame();
   }
 
   render() {
@@ -44,23 +50,20 @@ class LeafletMap extends React.Component {
         />
         {/*this.props.activities.map(activity => (
           <Marker
-            onClick={() => console.log("fuck my shit up")}
+            onClick={this.props.gotoGame}
             icon={activity.icon}
             key={activity.id}
             position={activity.position}
-          >
-            <Popup>
-              <span> Here is text </span>
-            </Popup>
-          </Marker>
-        )) */}
+          />
+        ))*/}
       </Map>
     );
   }
 }
 
-// LeafletMap.propTypes = {
-//   activities: PropTypes.array.isRequired,
-// };
+LeafletMap.propTypes = {
+  activities: PropTypes.array.isRequired,
+  gotoGame: PropTypes.func.isRequired,
+};
 
 export default LeafletMap;

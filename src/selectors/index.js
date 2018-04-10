@@ -13,7 +13,7 @@ const fromImmutableSelector = parentSelector => createSelector(
   state => (state.toJS ? state.toJS() : state),
 );
 
-const getActivities = state => state.filterActivities;
+const getActivities = state => state.activities;
 const getUser = state => state.users;
 
 // need this step if we to just to js something
@@ -26,11 +26,11 @@ export const getSelectedLevels = fromImmutableSelector(getImmutableLevels);
 const getImmutableActivities = makeKeyedSelector(getActivities, 'allActivities');
 export const getAllActivities = fromImmutableSelector(getImmutableActivities);
 
-const getImmutableVisableActivities = makeKeyedSelector(
+const getImmutableVisibleActivities = makeKeyedSelector(
   getActivities,
-  'visableActivities',
+  'visibleActivities',
 );
-export const getVisableActivities = fromImmutableSelector(getImmutableVisableActivities);
+export const getVisibleActivities = fromImmutableSelector(getImmutableVisibleActivities);
 
 const getImmutablePastActivities = makeKeyedSelector(
   getActivities,

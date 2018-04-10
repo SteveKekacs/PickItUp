@@ -6,10 +6,10 @@ import Grid from 'material-ui/Grid';
 import { withStyles } from 'material-ui/styles';
 // import FakeMap from '../../images/HarvardScreenshot.png';
 //
-import SportIcon from './SportIcon';
+// import SportIcon from './SportIcon';
 import HostGameButton from './HostGameButton';
 import LeafletMap from './LeafletMap';
-import { getVisableActivities } from '../../selectors';
+import { getVisibleActivities } from '../../selectors';
 import { gotoCurrentGame } from '../../action-creators/global-actions';
 
 /**************************************************************************************************
@@ -30,30 +30,30 @@ const ConnectedHostGame = connect(
  * Connected Host Game
  *************************************************************************************************/
 
-// TODO make it go to id of game
-const mapDispatchToPropsSportIcon = dispatch => bindActionCreators({
-  gotoCurrentGame,
-}, dispatch);
+// // TODO make it go to id of game
+// const mapDispatchToPropsSportIcon = dispatch => bindActionCreators({
+//   gotoCurrentGame,
+// }, dispatch);
 
-const ConnectedSportIcon = connect(
-  null,
-  mapDispatchToPropsSportIcon,
-)(SportIcon);
+// const ConnectedSportIcon = connect(
+//   null,
+//   mapDispatchToPropsSportIcon,
+// )(SportIcon);
 
 /**************************************************************************************************
  * Connected Map
  *************************************************************************************************/
 
 const mapDispatchToPropsMap = dispatch => bindActionCreators({
-  gotoCurrentGame,
+  gotoGame: gotoCurrentGame,
 }, dispatch);
 
 const mapStateToPropsMap = state => ({
-  activities: getVisableActivities(state),
+  activities: getVisibleActivities(state),
 });
 
 const ConnectedLeafletMap = connect(
-  null,
+  mapStateToPropsMap,
   mapDispatchToPropsMap,
 )(LeafletMap);
 

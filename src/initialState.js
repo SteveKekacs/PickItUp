@@ -1,16 +1,17 @@
 import { generateActivities, generateUsers } from './utils/helpfulFunctions'
 
 
+const allActivities = generateActivities();
 const initialState = {
   // the selected sports and levels that should appear on the map
   selectedSports: [],
   selectedLevels: [],
 
   // list of all activities currently going
-  allActivities: generateActivities(),
+  allActivities,
 
   // list of activites to show based on the selectedSports / selectedLevels
-  visibleActivities: [],
+  visibleActivities: allActivities,
 
   // will be set with activity Info
   currentActivity: {},
