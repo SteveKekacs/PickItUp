@@ -45,7 +45,9 @@ function MainMap() {
   return (
     <Grid item xs={12} >
       <ConnectedSportIcon styling={{ top: "200px", right: "40px" }} />
-      <LeafletMap />
+      <LeafletMap>
+
+      </LeafletMap>
       <ConnectedHostGame />
     </Grid>
   );
