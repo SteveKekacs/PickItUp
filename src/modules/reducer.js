@@ -29,7 +29,7 @@ export function users(state = initState, action) {
         case actionTypes.GET_USER_INFO:
             // given a user id get all info, including activities
             const userId = parseInt(action.userId);
-
+            console.log("LOADING USER INFO: ", userId);
             // get basic user info
             state = state.set('userInfo', state.get('users').find((obj) => obj.get('id') === userId));
 
