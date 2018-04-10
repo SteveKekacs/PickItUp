@@ -84,15 +84,15 @@ export function makeRandomEvent() {
 export const generateActivities = () => {
   // Should call make random event
   return ([
-    makeRandomEvent(),
-    makeRandomEvent(),
-    makeRandomEvent(),
-    makeRandomEvent(),
-    makeRandomEvent(),
-    makeRandomEvent(),
-    makeRandomEvent(),
-    makeRandomEvent(),
-    makeRandomEvent(),
+    // makeRandomEvent(),
+    // makeRandomEvent(),
+    // makeRandomEvent(),
+    // makeRandomEvent(),
+    // makeRandomEvent(),
+    // makeRandomEvent(),
+    // makeRandomEvent(),
+    // makeRandomEvent(),
+    // makeRandomEvent(),
   ]);
 };
 

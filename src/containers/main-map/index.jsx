@@ -49,7 +49,7 @@ const mapDispatchToPropsMap = dispatch => bindActionCreators({
 }, dispatch);
 
 const mapStateToPropsMap = state => ({
-  activities: getVisibleActivities(state),
+  activities: state.activities.get("visibleActivities").toJS(),
 });
 
 const ConnectedLeafletMap = connect(

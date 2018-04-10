@@ -48,14 +48,14 @@ class LeafletMap extends React.Component {
           attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {/*this.props.activities.map(activity => (
+        {this.props.activities.map(activity => (
           <Marker
-            onClick={this.props.gotoGame}
+            onClick={this.onClick}
             icon={activity.icon}
             key={activity.id}
             position={activity.position}
           />
-        ))*/}
+        ))}
       </Map>
     );
   }

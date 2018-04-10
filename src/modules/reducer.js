@@ -10,9 +10,9 @@ export function activities(state = initState, action) {
             // set new sports and levels
             state = state.set('selectedSports', List(action.sports))
                 .set('selectedLevels', List(action.levels));
-            
+
             // filter activities based on selectedSports and selectedLevels
-            return state.set('visibleActivities', state.get('allActivities').filter((activity) => {
+        return state.set('visibleActivities', state.get('allActivities').filter((activity) => {
                 return (
                     (action.sports.length === 0 || action.sports.includes(activity.get('sport'))) &&
                     (action.levels.length === 0 || action.levels.includes(activity.get('level')))
@@ -35,7 +35,7 @@ export function users(state = initState, action) {
 
             // now get activities, friends and TODO: rewards
             const pastActivities = state.get('allActivities').filter((obj) => obj.get('playerIds').toJS().includes(userId));
-            
+
             const friend_ids = state.get('users')
                                     .find((obj) => obj.get('id') === userId)
                                     .get('friendIds').toJS();
