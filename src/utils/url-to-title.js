@@ -4,7 +4,7 @@ export default {
   "/profile": "Your Profile",
   "/friends": "Your Friends",
   "/rewards": "Your Rewards",
-  "/settings": "Manage Settings",
+  "/activities": "Your Activities",
   "/ingame": "Current Game",
   "/postgame": "Game Summary",
   "/signup": "Sign Up",

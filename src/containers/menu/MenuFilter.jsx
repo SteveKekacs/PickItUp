@@ -17,7 +17,6 @@ import { connect } from 'react-redux';
 import { sportsList, levelsList } from '../../utils/constants';
 
 import * as actions from '../../action-creators/actions'
-// TODO make filter do something
 
 const styles = {
   icons: {

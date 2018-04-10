@@ -6,7 +6,7 @@ export const gotoHome = () => push('/home');
 export const gotoProfile = (userId) => push(`/profile/${userId}`);
 export const gotoFriends = () => push('/friends');
 export const gotoRewards = () => push('/rewards');
-export const gotoSettings = () => push('/settings');
+export const gotoActivities = () => push('/activities');
 export const gotoCurrentGame = () => push('/ingame');
 export const gotoPostGame = () => push('/postgame');
 export const gotoLogin = () => push('/');

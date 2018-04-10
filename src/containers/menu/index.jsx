@@ -39,7 +39,7 @@ const mapDispatchToPropsNav = dispatch => bindActionCreators({
   gotoProfile: globalActionCreators.gotoProfile,
   gotoFriends: globalActionCreators.gotoFriends,
   gotoRewards: globalActionCreators.gotoRewards,
-  gotoSettings: globalActionCreators.gotoSettings,
+  gotoActivities: globalActionCreators.gotoActivities,
   gotoLogout: globalActionCreators.gotoLogin,
 }, dispatch);
 

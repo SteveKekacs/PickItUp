@@ -32,7 +32,7 @@ class MenuDropdown extends React.Component {
     this.gotoProfile = this.handleClose(this.props.gotoProfile, this.props.currentUserId);
     this.gotoFriends = this.handleClose(this.props.gotoFriends);
     this.gotoRewards = this.handleClose(this.props.gotoRewards);
-    this.gotoSettings = this.handleClose(this.props.gotoSettings);
+    this.gotoActivities = this.handleClose(this.props.gotoActivities);
     this.gotoLogout = this.handleClose(this.props.gotoLogout);
   }
 
@@ -91,9 +91,9 @@ class MenuDropdown extends React.Component {
             <Icon className={classes.icons}>card_giftcard</Icon>
             Rewards
           </MenuItem>
-          <MenuItem onClick={this.gotoSettings}>
-            <Icon className={classes.icons}>settings</Icon>
-            Settings
+          <MenuItem onClick={this.gotoActivities}>
+            <Icon className={classes.icons}>history</Icon>
+            Activities
           </MenuItem>
           <MenuItem onClick={this.gotoLogout}>
             <Icon className={classes.icons}>exit_to_app</Icon>
@@ -111,7 +111,7 @@ MenuDropdown.propTypes = {
   gotoProfile: PropTypes.func.isRequired,
   gotoFriends: PropTypes.func.isRequired,
   gotoRewards: PropTypes.func.isRequired,
-  gotoSettings: PropTypes.func.isRequired,
+  gotoActivities: PropTypes.func.isRequired,
   gotoLogout: PropTypes.func.isRequired,
 };
 

@@ -51,10 +51,6 @@ const styles = theme => ({
 });
 
 class Profile extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.props.getUserInfo(this.props.match.params.userId);
   }

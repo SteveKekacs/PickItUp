@@ -12,7 +12,7 @@ import About from '../about';
 import Profile from '../profile';
 import Friends from '../friends';
 import Rewards from '../rewards';
-import Settings from '../settings';
+import Activities from '../activities';
 import SignUpPage from '../sign-up';
 import PostGamePage from '../post-game';
 import InGameScreen from '../in-game';
@@ -58,7 +58,7 @@ function App(props) {
           <Route path="/profile/:userId" component={Profile} />
           <Route exact path="/friends" component={Friends} />
           <Route exact path="/rewards" component={Rewards} />
-          <Route exact path="/settings" component={Settings} />
+          <Route exact path="/activities" component={Activities} />
           <Route exact path="/about-us" component={About} />
         </Grid>
       </div>
