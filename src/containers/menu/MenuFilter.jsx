@@ -16,7 +16,7 @@ import { connect } from 'react-redux';
 
 import { sportsList, levelsList } from '../../utils/constants';
 
-import * as FilterActions from '../../action-creators/filter-actions'
+import * as actions from '../../action-creators/actions'
 // TODO make filter do something
 
 const styles = {
@@ -127,7 +127,6 @@ MenuFilter.propTypes = {
 };
 
 function mapStateToProps(state) {
-  console.log("MAP STATE TO PROPS", state.filterActivities.get('selectedSports'));
   return {
     selectedSports: state.filterActivities.get('selectedSports').toJS(),
     selectedLevels: state.filterActivities.get('selectedLevels').toJS()
@@ -136,7 +135,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    filterActivities: bindActionCreators(FilterActions.filterActivities, dispatch)
+    filterActivities: bindActionCreators(actions.filterActivities, dispatch)
   };
 };
 

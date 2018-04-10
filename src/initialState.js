@@ -26,8 +26,16 @@ const initialState = {
   ],
 
   // list of activites to show based on the selectedSports / selectedLevels
-  visibleActivities: [
-  ]
+  visibleActivities: [],
+
+  // list of past activities to show
+  pastActivities: [],
+
+  // if joining/in middle of/in post game currentActivity 
+  // will be set with activity Info
+  currentActivity: {},
+  // currentActivityStatus: joining/participating/ended
+  currentActivityStatus: null,
 };
 
 export default initialState;

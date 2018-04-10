@@ -1,5 +1,5 @@
 import Immutable, { List, Map } from 'immutable';
-import * as actionTypes from '../action-types/FilterActions';
+import * as actionTypes from '../action-creators/ActionTypes';
 import initialState from '../initialState';
 
 const initState = Immutable.fromJS(initialState);
