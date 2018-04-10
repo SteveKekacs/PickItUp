@@ -28,21 +28,24 @@ export const generateUsers = () => {
       first_name: "Steve",
       last_name: "Kekacs",
       age: 24,
-      bio: "Ball is Life!"
+      bio: "Ball is Life!",
+      friendIds: [2, 3]
     },
     {
       id: 2,
       first_name: "Ty",
       last_name: "Rocca",
       age: 23,
-      bio: "Swimming is Life!"
+      bio: "Swimming is Life!",
+      friendIds: [1, 3]
     },
     {
       id: 3,
       first_name: "Manav",
       last_name: "Khandelwal",
       age: 21,
-      bio: "All Sports are Life!"
+      bio: "All Sports are Life!",
+      friendIds: [1, 2]
     },
     
   ]);
