@@ -9,6 +9,7 @@ import { withStyles } from 'material-ui/styles';
 import SportIcon from './SportIcon';
 import HostGameButton from './HostGameButton';
 import LeafletMap from './LeafletMap';
+import { getVisableActivities } from '../../selectors';
 import { gotoCurrentGame } from '../../action-creators/global-actions';
 
 /**************************************************************************************************
@@ -39,15 +40,28 @@ const ConnectedSportIcon = connect(
   mapDispatchToPropsSportIcon,
 )(SportIcon);
 
+/**************************************************************************************************
+ * Connected Map
+ *************************************************************************************************/
+
+const mapDispatchToPropsMap = dispatch => bindActionCreators({
+  gotoCurrentGame,
+}, dispatch);
+
+const mapStateToPropsMap = state => ({
+  activities: getVisableActivities(state),
+});
+
+const ConnectedLeafletMap = connect(
+  null,
+  mapDispatchToPropsMap,
+)(LeafletMap);
 
 // Main component
 function MainMap() {
   return (
     <Grid item xs={12} >
-      <ConnectedSportIcon styling={{ top: "200px", right: "40px" }} />
-      <LeafletMap>
-
-      </LeafletMap>
+      <ConnectedLeafletMap />
       <ConnectedHostGame />
     </Grid>
   );

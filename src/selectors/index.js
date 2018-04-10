@@ -52,4 +52,4 @@ export const getCurrentActivityStatus = makeKeyedSelector(
 
 
 // Temp
-export getUser;
+// export getUser;

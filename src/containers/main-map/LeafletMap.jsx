@@ -42,7 +42,7 @@ class LeafletMap extends React.Component {
           attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {this.props.activities.map(activity => (
+        {/*this.props.activities.map(activity => (
           <Marker
             onClick={() => console.log("fuck my shit up")}
             icon={activity.icon}
@@ -53,14 +53,14 @@ class LeafletMap extends React.Component {
               <span> Here is text </span>
             </Popup>
           </Marker>
-        ))}
+        )) */}
       </Map>
     );
   }
 }
 
-LeafletMap.propTypes = {
-  activities: PropTypes.array.isRequired,
-};
+// LeafletMap.propTypes = {
+//   activities: PropTypes.array.isRequired,
+// };
 
 export default LeafletMap;
