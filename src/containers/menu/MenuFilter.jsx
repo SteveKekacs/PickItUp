@@ -128,8 +128,8 @@ MenuFilter.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    selectedSports: state.filterActivities.get('selectedSports').toJS(),
-    selectedLevels: state.filterActivities.get('selectedLevels').toJS()
+    selectedSports: state.activities.get('selectedSports').toJS(),
+    selectedLevels: state.activities.get('selectedLevels').toJS()
   };
 };
 

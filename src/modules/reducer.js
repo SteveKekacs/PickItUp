@@ -4,7 +4,7 @@ import initialState from '../initialState';
 
 const initState = Immutable.fromJS(initialState);
 
-export default function filterActivities(state = initState, action) {
+export function activities(state = initState, action) {
     switch (action.type) {
         case actionTypes.FILTER_ACTIVITIES:
             // set new sports and levels
@@ -21,5 +21,24 @@ export default function filterActivities(state = initState, action) {
 
         default:
             return state;
+    };
+};
+
+export function users(state = initState, action) {
+    switch(action.type) {
+        case actionTypes.GET_USER_INFO:
+            // TODO: FIX THIS!!!
+            // given a user id get all info, including activities
+            const userId = action.userId;
+
+            // get basic user info
+            state = state.set('userInfo', state.get('users').find((obj) => obj.get('id') === userId));
+
+            // now get activities
+            const past_activities = state.get('allActivities').toJS().filter((obj) => obj.playerIds.includes(userId));
+
+            return state.setIn(['userInfo', 'pastActivities'], List(past_activities))
+        default:
+            return state;
     }
-}
+};

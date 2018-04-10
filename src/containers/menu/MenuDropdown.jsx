@@ -27,8 +27,9 @@ class MenuDropdown extends React.Component {
     this.eltId = "menu-dropdown";
     this.handleClick = this.handleClick.bind(this);
     this.handleClose = this.handleClose.bind(this);
+
     this.gotoMainMap = this.handleClose(this.props.gotoMainMap);
-    this.gotoProfile = this.handleClose(this.props.gotoProfile);
+    this.gotoProfile = this.handleClose(this.props.gotoProfile, this.props.currentUserId);
     this.gotoFriends = this.handleClose(this.props.gotoFriends);
     this.gotoRewards = this.handleClose(this.props.gotoRewards);
     this.gotoSettings = this.handleClose(this.props.gotoSettings);
@@ -39,11 +40,15 @@ class MenuDropdown extends React.Component {
     this.setState({ anchorEl: event.currentTarget });
   }
 
-  handleClose(func) {
+  handleClose(func, param) {
     return () => {
       this.setState({ anchorEl: null });
       if (func !== null) {
-        func();
+        if (param !== null) {
+          func(param);
+        } else {
+          func();
+        }
       }
     };
   }

@@ -1,4 +1,4 @@
-import { generateActivities } from './utils/helpfulFunctions'
+import { generateActivities, generateUsers } from './utils/helpfulFunctions'
 
 
 const initialState = {
@@ -12,14 +12,20 @@ const initialState = {
   // list of activites to show based on the selectedSports / selectedLevels
   visibleActivities: [],
 
-  // list of past activities to show
-  pastActivities: [],
-
   // if joining/in middle of/in post game currentActivity 
   // will be set with activity Info
   currentActivity: {},
   // currentActivityStatus: joining/participating/ended
   currentActivityStatus: null,
+
+  // list of all users on app
+  users: generateUsers(),
+
+  // id of user on app
+  currentUserId: 1,
+
+  // user info for profile page
+  userInfo: {},
 };
 
 export default initialState;

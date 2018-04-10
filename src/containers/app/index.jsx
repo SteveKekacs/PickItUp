@@ -55,7 +55,7 @@ function App(props) {
           <Route exact path="/home" component={MainMap} />
           <Route exact path="/ingame" component={InGameScreen} />
           <Route exact path="/postgame" component={PostGamePage} />
-          <Route exact path="/profile" component={Profile} />
+          <Route path="/profile/:userId" component={Profile} />
           <Route exact path="/friends" component={Friends} />
           <Route exact path="/rewards" component={Rewards} />
           <Route exact path="/settings" component={Settings} />

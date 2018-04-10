@@ -20,3 +20,30 @@ export const generateActivities = () => {
     },
   ]);
 }
+
+export const generateUsers = () => {
+  return ([
+    {
+      id: 1,
+      first_name: "Steve",
+      last_name: "Kekacs",
+      age: 24,
+      bio: "Ball is Life!"
+    },
+    {
+      id: 2,
+      first_name: "Ty",
+      last_name: "Rocca",
+      age: 23,
+      bio: "Swimming is Life!"
+    },
+    {
+      id: 3,
+      first_name: "Manav",
+      last_name: "Khandelwal",
+      age: 21,
+      bio: "All Sports are Life!"
+    },
+    
+  ]);
+}

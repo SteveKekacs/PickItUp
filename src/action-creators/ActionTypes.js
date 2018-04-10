@@ -1,1 +1,2 @@
 export const FILTER_ACTIVITIES = 'FILTER_ACTIVITIES';
+export const GET_USER_INFO = 'GET_USER_INFO';
