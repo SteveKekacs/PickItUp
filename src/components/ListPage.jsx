@@ -24,24 +24,31 @@ class ListPage extends React.Component {
         }
     }
 
-    renderItemsBasedOnType() {
+    renderItems(Component) {
         if (this.props.itemType === 'user') {
-            return this.renderItems(UserInline);
+          return (
+            this.props.items.filter((item) => (
+              (!this.state.searchTerm || 
+                (item.first_name + " " + item.last_name).toLowerCase().search(this.state.searchTerm.toLowerCase()) >= 0)
+            )).map((item) => (<UserInline data={item} />))
+          );
         } else if (this.props.itemType === 'reward') {
-            return this.renderItems(RewardInline);
+          // TODO FILTERING
+          return (
+            this.props.items.map((item) => (<RewardInline data={item} />))
+          )
         } else if (this.props.itemType === 'activity') {
-            return this.renderItems(ActivityInline);
+          return (
+            this.props.items.filter((item) => (
+              (!this.state.searchTerm || 
+                (item.name + " " + item.sport).toLowerCase().search(this.state.searchTerm.toLowerCase()) >= 0)
+            )).map((item) => (<ActivityInline data={item} />))
+          );
         }
     }
 
-    renderItems(Component) {
-        return this.props.items.map((item) => (
-            <Component data={item} />
-        ));
-    }
-
     render() {
-        let items = this.renderItemsBasedOnType()
+        let items = this.renderItems()
 
         if (this.props.items.length === 0) {
             items = (<div>No Results</div>);

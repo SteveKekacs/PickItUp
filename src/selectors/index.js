@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 // function that makes making immutable selectors faster
 const makeKeyedSelector = (parentSelector, key) => createSelector(
   parentSelector,
-  state => state.get(key),
+  state => {console.log("ASDFASDF", state); return state.get(key)},
 );
 
 // if you have an immutable selector and just need to 'toJS' it this
@@ -14,7 +14,7 @@ const fromImmutableSelector = parentSelector => createSelector(
 );
 
 const getActivities = state => state.activities;
-const getUser = state => state.users;
+// const getUser = state => state.users;
 
 // need this step if we to just to js something
 const getImmutableSports = makeKeyedSelector(getActivities, 'selectedSports');
