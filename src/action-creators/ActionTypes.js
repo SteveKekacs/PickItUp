@@ -1,2 +1,6 @@
 export const FILTER_ACTIVITIES = 'FILTER_ACTIVITIES';
 export const GET_USER_INFO = 'GET_USER_INFO';
+
+export const LOAD_FRIENDS = 'LOAD_FRIENDS';
+export const LOAD_REWARDS = 'LOAD_REWARDS';
+export const LOAD_ACTIVITIES = 'LOAD_ACTIVITIES';

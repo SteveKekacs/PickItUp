@@ -1,31 +1,31 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import Grid from 'material-ui/Grid';
-import Paper from 'material-ui/Paper';
+import ListPage from '../../components/ListPage';
+import * as actions from '../../action-creators/actions'
 
-const styles = theme => ({
-  paper: {
-    padding: theme.spacing.unit * 2,
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
-});
+// connecting to store
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-const Friends = props => (
-  <Grid item xs={12} >
-    <Paper className={props.classes.paper}>
-      <h1>Searchable List Below</h1>
-      <p>This is a list of your friends, below here you can click on them to view their profiles</p>
-      <p> EXAMPLE FRIEND </p>
-      <p> EXAMPLE FRIEND </p>
-      <p> EXAMPLE FRIEND </p>
-    </Paper>
-  </Grid>
-);
+class FriendsList extends ListPage {
+  componentDidMount() {
+    this.props.getUserInfo(this.props.userId);
+  }
+}
 
-Friends.propTypes = {
-  classes: PropTypes.object.isRequired,
+function mapStateToProps(state) {
+  return {
+    userId: state.users.get('currentUserId'),
+    items: state.users.getIn(['userInfo', 'friends']).toJS(),
+    itemType: "user"
+  };
 };
 
-export default withStyles(styles)(Friends);
+function mapDispatchToProps(dispatch) {
+  return {
+    getUserInfo: bindActionCreators(actions.getUserInfo, dispatch)
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FriendsList);

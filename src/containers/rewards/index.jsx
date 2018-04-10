@@ -1,32 +1,31 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import Grid from 'material-ui/Grid';
-import Paper from 'material-ui/Paper';
+import ListPage from '../../components/ListPage';
+import * as actions from '../../action-creators/actions'
 
-const styles = theme => ({
-  paper: {
-    padding: theme.spacing.unit * 2,
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
-});
+// connecting to store
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-const Rewards = props => (
-  <Grid item xs={12} >
-    <Paper className={props.classes.paper}>
-      <h1>Searchable Rewards</h1>
-      <p>This is where you could search rewards</p>
-      <p>Reward 20% here </p>
-      <p>Reward 20% here </p>
-      <p>Reward 20% here </p>
-      <p>Reward 20% here </p>
-    </Paper>
-  </Grid>
-);
+class RewardsList extends ListPage {
+  componentDidMount() {
+    this.props.getUserInfo(this.props.userId);
+  }
+}
 
-Rewards.propTypes = {
-  classes: PropTypes.object.isRequired,
+function mapStateToProps(state) {
+  return {
+    userId: state.users.get('currentUserId'),
+    items: state.users.getIn(['userInfo', 'rewards']).toJS(),
+    itemType: "reward"
+  };
 };
 
-export default withStyles(styles)(Rewards);
+function mapDispatchToProps(dispatch) {
+  return {
+    getUserInfo: bindActionCreators(actions.getUserInfo, dispatch)
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RewardsList);

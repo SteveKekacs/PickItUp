@@ -25,7 +25,11 @@ const initialState = {
   currentUserId: 1,
 
   // user info for profile page
-  userInfo: {},
+  userInfo: {
+    friends: [],
+    rewards: [],
+    pastActivities: []
+  },
 };
 
 export default initialState;
