@@ -2,10 +2,13 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import Grid from 'material-ui/Grid';
 import { withStyles } from 'material-ui/styles';
-import FakeMap from '../../images/HarvardScreenshot.png';
+// import FakeMap from '../../images/HarvardScreenshot.png';
+//
 import SportIcon from './SportIcon';
 import HostGameButton from './HostGameButton';
+import LeafletMap from './LeafletMap';
 import { gotoCurrentGame } from '../../action-creators/global-actions';
 
 /**************************************************************************************************
@@ -40,18 +43,11 @@ const ConnectedSportIcon = connect(
 // Main component
 function MainMap() {
   return (
-    <div style={{
-      backgroundImage: `url(${FakeMap})`,
-      width: "100%",
-      backgroundRepeat: "no-repeat",
-      backgroundPosition: "-430px",
-    }}
-    >
+    <Grid item xs={12} >
       <ConnectedSportIcon styling={{ top: "200px", right: "40px" }} />
-      <ConnectedSportIcon styling={{ bottom: "60px", left: "60px" }} />
-      <ConnectedSportIcon styling={{ bottom: "315px", left: "20px" }} />
+      <LeafletMap />
       <ConnectedHostGame />
-    </div>
+    </Grid>
   );
 }
 
