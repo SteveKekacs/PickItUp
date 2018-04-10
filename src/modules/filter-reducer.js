@@ -2,8 +2,9 @@ import Immutable, { List, Map } from 'immutable';
 import * as actionTypes from '../action-types/FilterActions';
 import initialState from '../initialState';
 
-const test = Immutable.fromJS(initialState);
-export default function filterActivities(state = test, action) {
+const initialState = Immutable.fromJS(initialState);
+
+export default function filterActivities(state = initialState, action) {
     switch (action.type) {
         case actionTypes.FILTER_ACTIVITIES:
             // set new sports and levels
