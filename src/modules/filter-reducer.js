@@ -1,30 +1,24 @@
+import Immutable, { List, Map } from 'immutable';
 import * as actionTypes from '../action-types/FilterActions';
 import initialState from '../initialState';
 
-export default function filterActivities(state = initialState, action) {
-	switch (action.type) {
-		case actionTypes.FILTER_ACTIVITIES:
-			let newState = Object.assign({}, state);
+const test = Immutable.fromJS(initialState);
+export default function filterActivities(state = test, action) {
+    switch (action.type) {
+        case actionTypes.FILTER_ACTIVITIES:
+            // set new sports and levels
+            state = state.set('selectedSports', List(action.sports))
+                .set('selectedLevels', List(action.levels));
+            
+            // filter activities based on selectedSports and selectedLevels
+            return state.set('visibleActivities', List(state.get('allActivities').toJS().filter((activity) => {
+                return (
+                    (action.sports.length === 0 || action.sports.includes(activity.sport)) &&
+                    (action.levels.length === 0 || action.levels.includes(activity.level))
+                );
+            })));
 
-			delete newState['selectedSports'];
-			newState.selectedSports = action.sports;
-
-			delete newState['selectedLevels'];
-			newState.selectedLevels = action.levels;
-
-			let visibleActivites = newState.allActivites;
-
-			visibleActivites = visibleActivites.filter((activity) => {
-				return (
-					(action.sports.length === 0 || action.sports.includes(activity.sport)) &&
-					(action.levels.length === 0 || action.levels.includes(activity.level))
-				);
-			});
-
-			// filter activities based on selectedSports and selectedLevels
-			return newState;
-
-		default:
-			return state;
-	}
+        default:
+            return state;
+    }
 }

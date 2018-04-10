@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 import createHistory from 'history/createBrowserHistory';
 import rootReducer from './modules';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import initialState from './initialState';
+// import initialState from './initialState';
 
 // // TODO: see this this works!
 // const hist = createHistory({ basename: '/user' })
@@ -34,7 +34,7 @@ const composedEnhancers = compose(
 
 const store = createStore(
   rootReducer,
-  initialState,
+  {},
   composedEnhancers,
 );
 

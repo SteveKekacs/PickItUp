@@ -6,7 +6,7 @@ const initialState = {
   selectedLevels: [],
   
   // list of all activities currently going
-  allActivites: [
+  allActivities: [
     {
       name: "Steve's Game",
       playerIds: [1, 2],
@@ -26,7 +26,7 @@ const initialState = {
   ],
 
   // list of activites to show based on the selectedSports / selectedLevels
-  visibleActivites: [
+  visibleActivities: [
   ]
 };
 

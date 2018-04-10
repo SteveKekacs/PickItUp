@@ -127,9 +127,10 @@ MenuFilter.propTypes = {
 };
 
 function mapStateToProps(state) {
+  console.log("MAP STATE TO PROPS", state.filterActivities.get('selectedSports'));
   return {
-    selectedSports: state.filterActivities.selectedSports,
-    selectedLevels: state.filterActivities.selectedLevels
+    selectedSports: state.filterActivities.get('selectedSports').toJS(),
+    selectedLevels: state.filterActivities.get('selectedLevels').toJS()
   };
 };
 
