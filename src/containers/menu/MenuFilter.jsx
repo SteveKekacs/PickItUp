@@ -17,7 +17,6 @@ import { connect } from 'react-redux';
 import { sportsList, levelsList } from '../../utils/constants';
 
 import * as actions from '../../action-creators/actions'
-// TODO make filter do something
 
 const styles = {
   icons: {
@@ -128,8 +127,8 @@ MenuFilter.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    selectedSports: state.filterActivities.get('selectedSports').toJS(),
-    selectedLevels: state.filterActivities.get('selectedLevels').toJS()
+    selectedSports: state.activities.get('selectedSports').toJS(),
+    selectedLevels: state.activities.get('selectedLevels').toJS()
   };
 };
 

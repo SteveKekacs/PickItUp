@@ -28,18 +28,23 @@ const ConnectedMenuTitle = connect(
 /*************************************************************************************************
  * Mapped Menu
  *************************************************************************************************/
+const mapStateToProps = state => {
+  return ({
+    currentUserId: state.users.get('currentUserId')
+  })
+}
 
 const mapDispatchToPropsNav = dispatch => bindActionCreators({
   gotoMainMap: globalActionCreators.gotoHome,
   gotoProfile: globalActionCreators.gotoProfile,
   gotoFriends: globalActionCreators.gotoFriends,
   gotoRewards: globalActionCreators.gotoRewards,
-  gotoSettings: globalActionCreators.gotoSettings,
+  gotoActivities: globalActionCreators.gotoActivities,
   gotoLogout: globalActionCreators.gotoLogin,
 }, dispatch);
 
 const ConnectedMenuDropdown = connect(
-  null,
+  mapStateToProps,
   mapDispatchToPropsNav,
 )(MenuDropdown);
 
