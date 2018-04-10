@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Menu, { MenuItem } from 'material-ui/Menu';
-import Select from 'material-ui/Select'
+import { ListItemText } from 'material-ui/List';
+import Select from 'material-ui/Select';
+import Checkbox from 'material-ui/Checkbox';
 import { FormControl, FormHelperText } from 'material-ui/Form';
 import Input, { InputLabel } from 'material-ui/Input';
 import IconButton from 'material-ui/IconButton';
@@ -12,7 +14,7 @@ import Icon from 'material-ui/Icon';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { sportToFilter, skillLevels } from '../../utils/constants';
+import { sportsList, levelsList } from '../../utils/constants';
 
 import * as FilterActions from '../../action-creators/filter-actions'
 // TODO make filter do something
@@ -75,35 +77,37 @@ class MenuFilter extends React.Component {
           <FormControl>
             <InputLabel htmlFor="sport-filter">Sports</InputLabel>
             <Select 
-              native
+              multiple
               value={this.props.selectedSports}
-              multiple={true} 
               onChange={(event) => this.props.filterActivities(event.target.value, this.props.selectedLevels)}
-              inputProps={{
-                id: "sport-filter"
-              }}
+              input={<Input id="sport-filter" />}
+              renderValue={selected => selected.join(', ')}
             >
-              { Object.entries(sportToFilter).map((sportInfo) => {
-                return (<option value={ sportInfo[1] }>{ sportInfo[0] }</option>);
-              }
+              { sportsList.map((sport) => (
+                  <MenuItem key={sport} value={sport}>
+                    <Checkbox checked={this.props.selectedSports.indexOf(sport) > -1} />
+                    <ListItemText primary={sport} />
+                  </MenuItem>
+                )
               )}
             </Select>
           </FormControl>
 
           <FormControl>
-            <InputLabel htmlFor="level-filter">Skill Level</InputLabel>
+            <InputLabel htmlFor="level-filter">Skill Levels</InputLabel>
             <Select 
-              native
+              multiple
               value={this.props.selectedLevels}
-              multiple={true} 
               onChange={(event) => this.props.filterActivities(this.props.selectedSports, event.target.value)}
-              inputProps={{
-                id: "level-filter"
-              }}
+              input={<Input id="level-filter" />}
+              renderValue={selected => selected.join(', ')}
             >
-              { Object.entries(skillLevels).map((levelInfo) => {
-                return (<option value={ levelInfo[1] }>{ levelInfo[0] }</option>);
-              }
+              { levelsList.map((level) => (
+                  <MenuItem key={level} value={level}>
+                    <Checkbox checked={this.props.selectedLevels.indexOf(level) > -1} />
+                    <ListItemText primary={level} />
+                  </MenuItem>
+                )
               )}
             </Select>
           </FormControl>
@@ -124,8 +128,8 @@ MenuFilter.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    selectedSports: state.selectedSports,
-    selectedLevels: state.selectedLevels
+    selectedSports: state.filterActivities.selectedSports,
+    selectedLevels: state.filterActivities.selectedLevels
   };
 };
 

@@ -14,6 +14,12 @@ export const sportsList = [
   "Volleyball",
 ];
 
+export const levelsList = [
+  "Beginner",
+  "Intermediate",
+  "Advanced"
+]
+
 export const sportToFilter = {
   All: "all_sports",
   Baseball: "baseball",
