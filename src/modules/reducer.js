@@ -34,7 +34,7 @@ export function users(state = initState, action) {
             state = state.set('userInfo', state.get('users').find((obj) => obj.get('id') === userId));
 
             // now get activities, friends and TODO: rewards
-            const pastActivities = state.get('allActivities').toJS().filter((obj) => obj.playerIds.includes(userId));
+            const pastActivities = state.get('allActivities').filter((obj) => obj.get('playerIds').toJS().includes(userId));
             
             const friend_ids = state.get('users')
                                     .find((obj) => obj.get('id') === userId)
@@ -42,8 +42,8 @@ export function users(state = initState, action) {
 
             const friends = state.get('users').filter((obj) => friend_ids.includes(obj.get('id')));
 
-            return state.setIn(['userInfo', 'pastActivities'], List(pastActivities))
-                        .setIn(['userInfo', 'friends'], List(friends))
+            return state.setIn(['userInfo', 'pastActivities'], pastActivities)
+                        .setIn(['userInfo', 'friends'], friends)
                         .setIn(['userInfo', 'rewards'], List([])); // TODO: Rewards
         default:
             return state;
