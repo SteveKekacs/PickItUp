@@ -5,5 +5,5 @@ import { activities, users } from './reducer';
 export default combineReducers({
   routing: routerReducer,
   activities,
-  users
+  users,
 });
