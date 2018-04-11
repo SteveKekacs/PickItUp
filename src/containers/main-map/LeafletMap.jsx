@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+import List, { ListItem, ListItemText } from 'material-ui/List';
+import Button from 'material-ui/Button';
+import Grid from 'material-ui/Grid';
 
 const defaultCoords = {
   lat: 42.374615,
@@ -13,16 +16,14 @@ class LeafletMap extends React.Component {
     super(props);
     this.state = { ...defaultCoords };
     this.onLocationFound = this.onLocationFound.bind(this);
-    this.onClick = this.onClick.bind(this);
   }
 
   componentDidMount() {
     // TODO: make it so the 'did mount' actually does mount
-    // this._map.leafletElement.locate({
-    //   setView: true,
-    //   maxZoom: 16,
-    // });
-    // setTimeout(this.props.gotoGame, 5000);
+    this._map.leafletElement.locate({
+      setView: true,
+      maxZoom: 16,
+    });
   }
 
   onLocationFound(e) {
@@ -30,10 +31,6 @@ class LeafletMap extends React.Component {
     //   lat: e.latitude,
     //   lng: e.longitude,
     // });
-  }
-
-  onClick() {
-    this.props.gotoGame();
   }
 
   render() {
@@ -50,11 +47,33 @@ class LeafletMap extends React.Component {
         />
         {this.props.activities.map(activity => (
           <Marker
-            onClick={this.onClick}
             icon={activity.icon}
             key={activity.id}
             position={activity.position}
-          />
+          >
+            <Popup>
+              <Grid container spacing={8}>
+                <Grid item xs={12}>
+                  <h1>{activity.name}</h1>
+                  <p>Difficulty</p>
+                  <p>{activity.level}</p>
+                  <p>Start: 6:40pm End: 8:30pm</p>
+                  <p>There are 4 people neeeded (0 friends playing)</p>
+                </Grid>
+                <Grid item xs={12}>
+                  <Button
+                    fullWidth
+                    variant="raised"
+                    onClick={() => this.props.gotoGame(activity.id)}
+                    color="primary"
+                    autoFocus
+                  >
+                    Join Game
+                  </Button>
+                </Grid>
+              </Grid>
+            </Popup>
+          </Marker>
         ))}
       </Map>
     );

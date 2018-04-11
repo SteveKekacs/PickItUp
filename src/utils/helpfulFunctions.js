@@ -69,12 +69,11 @@ export function makeRandomEvent() {
     id: generateId(),
     position: [coords.lat, coords.lng],
     icon: sportToIcon[sport],
-    eventName: "Game with <Person Name>",
     playerIds: [1, 2],
     startTime: moment().hours(10).minutes(30),
     endTime: moment().hours(12),
     level: "intermediate",
-    name: "Steve's Game",
+    name: "<Steve's> Game",
     ...coords,
   };
 }
@@ -84,15 +83,15 @@ export function makeRandomEvent() {
 export const generateActivities = () => {
   // Should call make random event
   return ([
-    // makeRandomEvent(),
-    // makeRandomEvent(),
-    // makeRandomEvent(),
-    // makeRandomEvent(),
-    // makeRandomEvent(),
-    // makeRandomEvent(),
-    // makeRandomEvent(),
-    // makeRandomEvent(),
-    // makeRandomEvent(),
+    makeRandomEvent(),
+    makeRandomEvent(),
+    makeRandomEvent(),
+    makeRandomEvent(),
+    makeRandomEvent(),
+    makeRandomEvent(),
+    makeRandomEvent(),
+    makeRandomEvent(),
+    makeRandomEvent(),
   ]);
 };
 
