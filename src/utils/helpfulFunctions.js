@@ -1,9 +1,4 @@
 import moment from "moment";
-import { Icon } from 'leaflet';
-
-// TODO: @manav create a list of icons - probably need some sort of mapping to the sports - that
-// should live in the ./constants.js file but rn this is an example
-import basketballImg from '../images/basketball.png';
 
 /**************************************************************************************************
  * General Purpose functions
@@ -19,22 +14,12 @@ export function generateId(len) {
   return Array.from(arr, dec2hex).join('');
 }
 
+export function toTitleCase(str) {
+  return str.replace(/\w\S*/g, txt => (
+    txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+  ));
+}
 
-/**************************************************************************************************
- * Sport Mappings
- **************************************************************************************************/
-
-// for each sport the following should be done
-const basketballIcon = new Icon({
-  iconUrl: basketballImg,
-  iconSize: [20, 20], // size of the icon - think this is the pixel scaling
-});
-
-// then we want something like this so we can map sport id to
-// the icons (should line up with our other files)
-export const sportToIcon = {
-  basketball: basketballIcon,
-};
 
 /**************************************************************************************************
  * Functions for making fake games
@@ -68,12 +53,13 @@ export function makeRandomEvent() {
     sport,
     id: generateId(),
     position: [coords.lat, coords.lng],
-    icon: sportToIcon[sport],
     playerIds: [1, 2],
+    playersNeeded: 8,
+    creatorId: 1,
     startTime: moment().hours(10).minutes(30),
     endTime: moment().hours(12),
     level: "intermediate",
-    name: "<Steve's> Game",
+    name: "Placeholder's Game",
     ...coords,
   };
 }
