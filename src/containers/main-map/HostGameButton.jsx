@@ -43,6 +43,8 @@ class HostGameButton extends React.Component {
       open: false,
       sport: '',
       duration: "",
+      gameStart: "",
+      gameDescription: ""
     };
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -64,6 +66,7 @@ class HostGameButton extends React.Component {
 
   hostGame() {
     this.handleClose();
+    console.log("Submitting State", this.state);
     this.props.gotoCurrentGame();
   }
 
@@ -97,17 +100,19 @@ class HostGameButton extends React.Component {
               <TextField
                 autoFocus
                 margin="dense"
-                id="name"
+                id="gameDescription"
                 label="Game Name"
                 type="text"
+                onChange={this.handleChange('gameDescription')}
                 fullWidth
               />
               <TextField
                 fullWidth
-                id="datetime-local"
+                id="gameStart"
                 label="Set Start Time"
                 type="datetime-local"
-                defaultValue={""}
+                onChange={this.handleChange('gameStart')}
+                defaultValue=''
                 InputLabelProps={{
                   shrink: true,
                 }}
