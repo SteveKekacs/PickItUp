@@ -5,6 +5,7 @@ import Button from 'material-ui/Button';
 import { Marker, Popup } from 'react-leaflet';
 import Grid from 'material-ui/Grid';
 import { toTitleCase } from '../../utils/helpfulFunctions';
+import { sportToIcon } from '../../utils/constants';
 
 // TODO: Make the icons their own components
 // use styles!!!!
@@ -18,7 +19,7 @@ const SportIcon = (props) => {
   const spotsLeft = props.playersNeeded - props.playerIds.length;
   return (
     <Marker
-      icon={props.icon}
+      icon={sportToIcon[props.sport]}
       key={props.id}
       position={props.position}
     >
@@ -61,7 +62,7 @@ SportIcon.propTypes = {
   name: PropTypes.string.isRequired,
   level: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  icon: PropTypes.object.isRequired,
+  sport: PropTypes.string.isRequired,
   position: PropTypes.array.isRequired,
   playersNeeded: PropTypes.number.isRequired,
   playerIds: PropTypes.array.isRequired,

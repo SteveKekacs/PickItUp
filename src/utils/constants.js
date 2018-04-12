@@ -1,3 +1,8 @@
+import { Icon } from 'leaflet';
+// TODO: @manav create a list of icons - probably need some sort of mapping to the sports - that
+// should live in the ./constants.js file but rn this is an example
+import basketballImg from '../images/basketball.png';
+
 export const sportsList = [
   "Baseball",
   "Basketball",
@@ -17,8 +22,8 @@ export const sportsList = [
 export const levelsList = [
   "Beginner",
   "Intermediate",
-  "Advanced"
-]
+  "Advanced",
+];
 
 export const sportToFilter = {
   All: "all_sports",
@@ -41,5 +46,21 @@ export const skillLevels = {
   All: "all_levels",
   Beginner: "beginner",
   Intermediate: "intermediate",
-  Advanced: "advanced"
+  Advanced: "advanced",
+};
+
+/**************************************************************************************************
+ * Sport Mappings
+ **************************************************************************************************/
+
+// for each sport the following should be done
+const basketballIcon = new Icon({
+  iconUrl: basketballImg,
+  iconSize: [20, 20], // size of the icon - think this is the pixel scaling
+});
+
+// then we want something like this so we can map sport id to
+// the icons (should line up with our other files)
+export const sportToIcon = {
+  basketball: basketballIcon,
 };

@@ -15,8 +15,11 @@ import * as globalActionCreators from '../../action-creators/global-actions';
 /*************************************************************************************************
  * Mapped Title
  *************************************************************************************************/
+
+const stripId = str => str.replace(/\/\d+.+/g, "");
 const mapStateToPropsTitle = state => ({
-  pageName: UrlMapping[state.routing.location.pathname],
+  // TODO: make this strip off the id
+  pageName: UrlMapping[stripId(state.routing.location.pathname)],
 });
 
 const ConnectedMenuTitle = connect(
