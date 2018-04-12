@@ -9,10 +9,11 @@ import Dialog, {
   DialogContentText,
   DialogTitle,
 } from 'material-ui/Dialog';
-import { FormControl } from 'material-ui/Form';
 import Select from 'material-ui/Select';
 import Input, { InputLabel } from 'material-ui/Input';
 import TextField from 'material-ui/TextField';
+import Switch from 'material-ui/Switch';
+import { FormControlLabel, FormControl } from 'material-ui/Form';
 import { sportToFilter } from '../../utils/constants';
 
 // TODO: Make the icons their own components
@@ -42,18 +43,26 @@ class HostGameButton extends React.Component {
     this.state = {
       open: false,
       sport: '',
+      publicGame: true,
       duration: "",
       gameStart: "",
-      gameDescription: ""
+      gameDescription: "",
+      gameAddress: "",
+      useMyLocation: true,
     };
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.hostGame = this.hostGame.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
   }
 
   handleChange(name) {
     return event => this.setState({ [name]: event.target.value });
+  }
+
+  handleToggle(name) {
+    return event => this.setState({ [name]: event.target.checked });
   }
 
   handleClickOpen() {
@@ -112,7 +121,7 @@ class HostGameButton extends React.Component {
                 label="Set Start Time"
                 type="datetime-local"
                 onChange={this.handleChange('gameStart')}
-                defaultValue=''
+                defaultValue=""
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -159,6 +168,39 @@ class HostGameButton extends React.Component {
                   ))}
                 </Select>
               </FormControl>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={this.state.publicGame}
+                    onChange={this.handleToggle('publicGame')}
+                    value="publicGame"
+                  />
+                }
+                label="Make Game Public"
+              />
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={this.state.useMyLocation}
+                    onChange={this.handleToggle('useMyLocation')}
+                    value="useMyLocation"
+                  />
+                }
+                label="Start Game at My Current Location"
+              />
+              {!this.state.useMyLocation && (
+                <TextField
+                  fullWidth
+                  id="gameAddress"
+                  label="Set Game Address"
+                  type="text"
+                  onChange={this.handleChange('gameAddress')}
+                  defaultValue=""
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              )}
             </form>
           </DialogContent>
           <DialogActions>
