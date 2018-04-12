@@ -19,6 +19,12 @@ export function generateId(len) {
   return Array.from(arr, dec2hex).join('');
 }
 
+export function toTitleCase(str) {
+  return str.replace(/\w\S*/g, txt => (
+    txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+  ));
+}
+
 
 /**************************************************************************************************
  * Sport Mappings
@@ -70,10 +76,12 @@ export function makeRandomEvent() {
     position: [coords.lat, coords.lng],
     icon: sportToIcon[sport],
     playerIds: [1, 2],
+    playersNeeded: 8,
+    creatorId: 1,
     startTime: moment().hours(10).minutes(30),
     endTime: moment().hours(12),
     level: "intermediate",
-    name: "<Steve's> Game",
+    name: "Placeholder's Game",
     ...coords,
   };
 }

@@ -2,94 +2,71 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Button from 'material-ui/Button';
-import Dialog, {
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from 'material-ui/Dialog';
-import Basketball from '../../images/basketball.png';
+import { Marker, Popup } from 'react-leaflet';
+import Grid from 'material-ui/Grid';
+import { toTitleCase } from '../../utils/helpfulFunctions';
 
 // TODO: Make the icons their own components
 // use styles!!!!
-
 const styles = {
-  sportIcon: {
-    height: "20px",
-  },
+  // details: {
+  //   fontSize: "14px",
+  // },
 };
 
-class SportIcon extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: false,
-    };
-    this.handleClickOpen = this.handleClickOpen.bind(this);
-    this.handleClose = this.handleClose.bind(this);
-    this.handleJoinGame = this.handleJoinGame.bind(this);
-  }
-
-  handleClickOpen() {
-    this.setState({ open: true });
-  }
-
-  handleClose() {
-    this.setState({ open: false });
-  }
-
-  handleJoinGame() {
-    this.handleClose();
-    this.props.gotoCurrentGame();
-  }
-
-  render() {
-    const { classes } = this.props;
-    return (
-      <span
-        style={{
-          position: "absolute",
-          ...this.props.styling,
-        }}
-      >
-        <img
-          src={Basketball}
-          alt="basketball"
-          onClick={this.handleClickOpen}
-          className={classes.sportIcon}
-        />
-        <Dialog
-          open={this.state.open}
-          onClose={this.handleClose}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
-          <DialogTitle id="alert-dialog-title">{"Join Steve's Game?"}</DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              There are currently 3 players and 2 more are needed.
-              The game starts at 6:30pm and will go until 8:30pm.
-              [TODO: Style this]
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button variant="raised" onClick={this.handleClose} color="default">
-              Cancel
-            </Button>
-            <Button variant="raised" onClick={this.handleJoinGame} color="primary" autoFocus>
+const SportIcon = (props) => {
+  const spotsLeft = props.playersNeeded - props.playerIds.length;
+  return (
+    <Marker
+      icon={props.icon}
+      key={props.id}
+      position={props.position}
+    >
+      <Popup>
+        <Grid container spacing={8}>
+          <Grid item xs={12}>
+            <h2>{props.name} <i>({spotsLeft}/{props.playersNeeded})</i></h2>
+            <Grid container spacing={0}>
+              <Grid item xs={12}>
+                <b>Seeking:</b> {spotsLeft} players <i>(0 friends playing)</i>
+              </Grid>
+              <Grid item xs={12}>
+                <b>Difficulty:</b> {toTitleCase(props.level)}
+              </Grid>
+              <Grid item xs={12}>
+                <b>Game Time:</b> {props.startTime.calendar()} - {props.endTime.format('h:mm A')}
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item xs={12}>
+            <Button
+              fullWidth
+              variant="raised"
+              onClick={() => props.gotoGame(props.id)}
+              color="primary"
+              autoFocus
+            >
               Join Game
             </Button>
-          </DialogActions>
-        </Dialog>
-      </span>
-    );
-  }
-}
+          </Grid>
+        </Grid>
+      </Popup>
+    </Marker>
+  );
+};
 
 SportIcon.propTypes = {
-  classes: PropTypes.object.isRequired,
-  styling: PropTypes.object.isRequired,
-  gotoCurrentGame: PropTypes.func.isRequired,
+  // classes: PropTypes.object.isRequired,
+  gotoGame: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  level: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  icon: PropTypes.object.isRequired,
+  position: PropTypes.array.isRequired,
+  playersNeeded: PropTypes.number.isRequired,
+  playerIds: PropTypes.array.isRequired,
+  startTime: PropTypes.object.isRequired,
+  endTime: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(SportIcon);
