@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 // function that makes making immutable selectors faster
 const makeKeyedSelector = (parentSelector, key) => createSelector(
   parentSelector,
-  state => {console.log("ASDFASDF", state); return state.get(key)},
+  state => state.get(key),
 );
 
 // if you have an immutable selector and just need to 'toJS' it this
