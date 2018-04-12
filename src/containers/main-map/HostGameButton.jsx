@@ -30,8 +30,9 @@ const styles = theme => ({
     flexWrap: 'wrap',
   },
   formControl: {
-    margin: theme.spacing.unit,
-    maxWidth: "calc(50% - 13px)",
+    // margin: theme.spacing.unit,
+    width: "100%",
+
   },
 });
 
@@ -106,27 +107,11 @@ class HostGameButton extends React.Component {
                 id="datetime-local"
                 label="Set Start Time"
                 type="datetime-local"
-                defaultValue=""
+                defaultValue={""}
                 InputLabelProps={{
                   shrink: true,
                 }}
               />
-              <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="sport-native-simple">Pick Sport</InputLabel>
-                <Select
-                  native
-                  value={this.state.sport}
-                  onChange={this.handleChange('sport')}
-                  input={<Input id="sport-native-simple" />}
-                >
-                  <option value="" />
-                  { Object.entries(sportToFilter).map(([sportName, sportSlug]) => (
-                    <option key={sportSlug} value={sportSlug} onClick={this.handleChange('sport')}>
-                      {sportName}
-                    </option>
-                  ))}
-                </Select>
-              </FormControl>
               <FormControl className={classes.formControl}>
                 <InputLabel htmlFor="sport-duration">Set Duration</InputLabel>
                 <Select
@@ -151,6 +136,22 @@ class HostGameButton extends React.Component {
                   <option value="120" onClick={this.handleChange('duration')}>
                     2 hours
                   </option>
+                </Select>
+              </FormControl>
+              <FormControl className={classes.formControl}>
+                <InputLabel htmlFor="sport-native-simple">Pick Sport</InputLabel>
+                <Select
+                  native
+                  value={this.state.sport}
+                  onChange={this.handleChange('sport')}
+                  input={<Input id="sport-native-simple" />}
+                >
+                  <option value="" />
+                  { Object.entries(sportToFilter).map(([sportName, sportSlug]) => (
+                    <option key={sportSlug} value={sportSlug} onClick={this.handleChange('sport')}>
+                      {sportName}
+                    </option>
+                  ))}
                 </Select>
               </FormControl>
             </form>
