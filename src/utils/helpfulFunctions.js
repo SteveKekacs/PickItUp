@@ -20,6 +20,16 @@ export function toTitleCase(str) {
   ));
 }
 
+// Function to generate random num between 0 and upper param (exlcusive)
+export const randomNum = (upper = 10) => {
+  return Math.round(Math.random() * upper + .5) - 1;
+}
+
+// Function to generate random string
+const randomString = (length) => {
+    return Math.round((Math.pow(36, length + 1) - Math.random() * Math.pow(36, length))).toString(36).slice(1);
+}
+
 
 /**************************************************************************************************
  * Functions for making fake games
@@ -109,4 +119,59 @@ export const generateUsers = () => {
     },
 
   ]);
+}
+
+export const generateRewards = () => {
+  return ([
+    {
+      title: "SweetGrean",
+      description: "10% Off Any Item",
+      code: randomString(10).toUpperCase()
+    },
+    {
+      title: "JambaJuice",
+      description: "Buy One Get One Free",
+      code: randomString(10).toUpperCase()
+    },
+    {
+      title: "Veggie Galaxy",
+      description: "5$ Coupon",
+      code: randomString(10).toUpperCase()
+    },
+    {
+      title: "V02 Vegan Caffe",
+      description: "10% Off Any Item",
+      code: randomString(10).toUpperCase()
+    },
+    {
+      title: "GloboGym",
+      description: "1 Free Month",
+      code: randomString(10).toUpperCase()
+    },
+    {
+      title: "Clover",
+      description: "50% Off Any Drink",
+      code: randomString(10).toUpperCase()
+    },
+    {
+      title: "Gold's Gym",
+      description: "25% Off 1 Year Subscription",
+      code: randomString(10).toUpperCase()
+    },
+    {
+      title: "ShakeWeight",
+      description: "Buy One Get One Free",
+      code: randomString(10).toUpperCase()
+    },
+    {
+      title: "Leafly",
+      description: "25% Off Any Strain",
+      code: randomString(10).toUpperCase()
+    },
+    {
+      title: "Subway",
+      description: "3$ Off Any Flatbread",
+      code: randomString(10).toUpperCase()
+    },
+  ])
 }

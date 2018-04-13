@@ -1,4 +1,4 @@
-import { generateActivities, generateUsers } from './utils/helpfulFunctions'
+import { generateActivities, generateUsers, generateRewards } from './utils/helpfulFunctions'
 
 
 const allActivities = generateActivities();
@@ -30,6 +30,9 @@ const initialState = {
     rewards: [],
     pastActivities: [],
   },
+
+  // fake rewards all users can draw from
+  rewards: generateRewards(),
 };
 
 export default initialState;
