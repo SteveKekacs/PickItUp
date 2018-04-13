@@ -1,4 +1,5 @@
 import moment from "moment";
+import { sportsList } from "./constants"
 
 /**************************************************************************************************
  * General Purpose functions
@@ -41,7 +42,8 @@ function makeRandomCoords() {
   };
 }
 
-const pickRandomSport = () => 'basketball';
+// TODO: implement
+const pickRandomSport = () => 'tennis';
 
 // THIS ONE SHOULD BE IMPROVED
 export function makeRandomEvent() {
