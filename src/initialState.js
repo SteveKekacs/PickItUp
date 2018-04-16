@@ -2,6 +2,11 @@ import { generateActivities, generateUsers } from './utils/helpfulFunctions'
 
 
 const allActivities = generateActivities();
+const activityLookup = allActivities.reduce(
+  (acc, activity) => ({ [activity.id]: activity, ...acc }),
+  allActivities,
+);
+
 const initialState = {
   // the selected sports and levels that should appear on the map
   selectedSports: [],
@@ -15,6 +20,7 @@ const initialState = {
 
   // will be set with activity Info
   currentActivity: {},
+
   // currentActivityStatus: joining/participating/ended
   currentActivityStatus: null,
 

@@ -8,6 +8,7 @@ module.exports = {
   },
   "rules": {
     "quotes": 0,
+    "radix": 0,
     "spaced-comment": 0,
     "react/forbid-prop-types": 0,
     "no-underscore-dangle": 0,

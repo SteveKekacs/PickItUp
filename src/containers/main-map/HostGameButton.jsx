@@ -64,7 +64,6 @@ class HostGameButton extends React.Component {
   handleToggle(name) {
     return event => this.setState({ [name]: event.target.checked });
   }
-
   handleClickOpen() {
     this.setState({ open: true });
   }
@@ -127,7 +126,9 @@ class HostGameButton extends React.Component {
                 }}
               />
               <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="sport-duration">Set Duration</InputLabel>
+                <InputLabel htmlFor="sport-duration">
+                  Set Duration
+                </InputLabel>
                 <Select
                   native
                   value={this.state.duration}
@@ -153,7 +154,9 @@ class HostGameButton extends React.Component {
                 </Select>
               </FormControl>
               <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="sport-native-simple">Pick Sport</InputLabel>
+                <InputLabel htmlFor="sport-native-simple">
+                  Pick Sport
+                </InputLabel>
                 <Select
                   native
                   value={this.state.sport}
@@ -161,11 +164,17 @@ class HostGameButton extends React.Component {
                   input={<Input id="sport-native-simple" />}
                 >
                   <option value="" />
-                  { Object.entries(sportToFilter).map(([sportName, sportSlug]) => (
-                    <option key={sportSlug} value={sportSlug} onClick={this.handleChange('sport')}>
-                      {sportName}
-                    </option>
-                  ))}
+                  {Object.entries(sportToFilter)
+                      .filter(([, sportSlug]) => sportSlug !== "all_sports")
+                      .map(([sportName, sportSlug]) => (
+                        <option
+                          key={sportSlug}
+                          value={sportSlug}
+                          onClick={this.handleChange('sport')}
+                        >
+                          {sportName}
+                        </option>
+                      ))}
                 </Select>
               </FormControl>
               <FormControlLabel
