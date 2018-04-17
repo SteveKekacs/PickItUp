@@ -8,22 +8,22 @@ export function activities(state = initState, action) {
   switch (action.type) {
     case actionTypes.FILTER_ACTIVITIES:
       // set new sports and levels
-      state = state.set('selectedSports', List(action.sports))
+      return state.set('selectedSports', List(action.sports))
         .set('selectedLevels', List(action.levels));
 
       // filter activities based on selectedSports and selectedLevels
-      return state.set('visibleActivities', state.get('allActivities').filter((activity) => {
-        return (
-          (action.sports.length === 0 || action.sports.includes(activity.get('sport'))) &&
-          (action.levels.length === 0 || action.levels.includes(activity.get('level')))
-        );
-      }));
-    // case actionTypes.CREATE_GAME:
-    //   stateu
+      // return state.set('visibleActivities', state.get('allActivities').filter((activity) => {
+      //   return (
+      //     (action.sports.length === 0 || action.sports.includes(activity.get('sport'))) &&
+      //     (action.levels.length === 0 || action.levels.includes(activity.get('level')))
+      //   );
+      // }));
+    case actionTypes.CREATE_GAME:
+      return state; // .set("allActivities", state.get('allActivities').concat(
     default:
       return state;
-  };
-};
+  }
+}
 
 export function users(state = initState, action) {
   switch(action.type) {

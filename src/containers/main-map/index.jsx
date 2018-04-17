@@ -9,7 +9,7 @@ import { withStyles } from 'material-ui/styles';
 // import SportIcon from './SportIcon';
 import HostGameButton from './HostGameButton';
 import LeafletMap from './LeafletMap';
-import { getVisibleActivities } from '../../selectors';
+import { getActiveActivities } from '../../selectors';
 import { gotoCurrentGame } from '../../action-creators/global-actions';
 
 /**************************************************************************************************
@@ -49,7 +49,7 @@ const mapDispatchToPropsMap = dispatch => bindActionCreators({
 }, dispatch);
 
 const mapStateToPropsMap = state => ({
-  activities: getVisibleActivities(state),
+  activities: getActiveActivities(state),
 });
 
 const ConnectedLeafletMap = connect(

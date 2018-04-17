@@ -3,30 +3,24 @@ import { Icon } from 'leaflet';
 // should live in the ./constants.js file but rn this is an example
 import basketballImg from '../images/basketball.png';
 
-export const sportsList = [
-  "Baseball",
-  "Basketball",
-  "Boxing",
-  "Cycling",
-  "Darthmouth",
-  "Football",
-  "Golf",
-  "Hockey",
-  "Soccer",
-  "Swimming",
-  "Table Tennis",
-  "Tennis",
-  "Volleyball",
-];
+// Skills
+export const skillLevels = {
+  // All: "all_levels",
+  Beginner: "beginner",
+  Intermediate: "intermediate",
+  Advanced: "advanced",
+};
 
-export const levelsList = [
-  "Beginner",
-  "Intermediate",
-  "Advanced",
-];
+export const filterToLevel = Object.entries(skillLevels).reduce(
+  (acc, [name, slug]) => ({ [slug]: name, ...acc }),
+  {},
+);
+export const levelsList = Object.keys(skillLevels);
+export const levelsSlugs = Object.values(skillLevels);
 
+// Sports
 export const sportToFilter = {
-  All: "all_sports",
+  // All: "all_sports",
   Baseball: "baseball",
   Basketball: "basketball",
   Boxing: "boxing",
@@ -42,12 +36,13 @@ export const sportToFilter = {
   Volleyball: "volleyball",
 };
 
-export const skillLevels = {
-  All: "all_levels",
-  Beginner: "beginner",
-  Intermediate: "intermediate",
-  Advanced: "advanced",
-};
+export const filterToSport = Object.entries(sportToFilter).reduce(
+  (acc, [name, slug]) => ({ [slug]: name, ...acc }),
+  {},
+);
+export const sportsList = Object.keys(sportToFilter);
+export const sportsSlugs = Object.values(sportToFilter);
+
 
 /**************************************************************************************************
  * Sport Mappings
