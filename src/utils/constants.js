@@ -15,8 +15,12 @@ export const filterToLevel = Object.entries(skillLevels).reduce(
   (acc, [name, slug]) => ({ [slug]: name, ...acc }),
   {},
 );
-export const levelsList = Object.keys(skillLevels);
-export const levelsSlugs = Object.values(skillLevels);
+export const levelsSlugs = [
+  "beginner",
+  "intermediate",
+  "advanced",
+];
+export const levelsList = levelsSlugs.map(l => filterToLevel[l]);
 
 // Sports
 export const sportToFilter = {
@@ -40,8 +44,8 @@ export const filterToSport = Object.entries(sportToFilter).reduce(
   (acc, [name, slug]) => ({ [slug]: name, ...acc }),
   {},
 );
-export const sportsList = Object.keys(sportToFilter);
-export const sportsSlugs = Object.values(sportToFilter);
+export const sportsList = Object.keys(sportToFilter).sort();
+export const sportsSlugs = Object.values(sportToFilter).sort();
 
 
 /**************************************************************************************************

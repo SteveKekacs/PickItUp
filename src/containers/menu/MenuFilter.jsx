@@ -12,7 +12,7 @@ import Input, { InputLabel } from 'material-ui/Input';
 import IconButton from 'material-ui/IconButton';
 import Icon from 'material-ui/Icon';
 import { getSelectedSports, getSelectedLevels } from '../../selectors';
-import { filterToSport, filterToLevel } from '../../utils/constants';
+import { levelsSlugs, sportsSlugs, filterToSport, filterToLevel } from '../../utils/constants';
 import * as actions from '../../action-creators/actions';
 
 const styles = {
@@ -70,10 +70,10 @@ class MenuFilter extends React.Component {
         >
           <MenuItem onClick={this.gotoMainMap}>
             <Icon className={classes.icons}>filter_list</Icon>
-            Filter Activities
+            Filter Sports and/or Skill Level
           </MenuItem>
           <FormControl className={this.props.classes.filter}>
-            <InputLabel htmlFor="sport-filter">Sports</InputLabel>
+            <InputLabel htmlFor="sport-filter">Sports (leave empty for all)</InputLabel>
             <Select
               multiple
               value={this.props.selectedSports}
@@ -88,17 +88,17 @@ class MenuFilter extends React.Component {
                   : ""
               )}
             >
-              {Object.entries(filterToSport).map(([sportSlug, sportName]) => (
+              {sportsSlugs.map(sportSlug => (
                 <MenuItem key={sportSlug} value={sportSlug}>
                   <Checkbox checked={this.props.selectedSports.indexOf(sportSlug) > -1} />
-                  <ListItemText primary={sportName} />
+                  <ListItemText primary={filterToSport[sportSlug]} />
                 </MenuItem>
               ))}
             </Select>
           </FormControl>
           <FormControl className={this.props.classes.filter}>
             <InputLabel htmlFor="level-filter">
-              Skill Levels
+              Skill Levels (leave empty for all)
             </InputLabel>
             <Select
               multiple
@@ -114,10 +114,10 @@ class MenuFilter extends React.Component {
                 event.target.value,
               )}
             >
-              {Object.entries(filterToLevel).map(([slug, level]) => (
+              {levelsSlugs.map(slug => (
                 <MenuItem key={slug} value={slug}>
                   <Checkbox checked={this.props.selectedLevels.indexOf(slug) > -1} />
-                  <ListItemText primary={level} />
+                  <ListItemText primary={filterToLevel[slug]} />
                 </MenuItem>
               ))}
             </Select>
