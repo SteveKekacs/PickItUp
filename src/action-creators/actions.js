@@ -10,10 +10,12 @@ export function getUserInfo(userId) {
 }
 
 export function hostGame(gameSettings) {
-  const gameEnd = gameSettings.gameStart + moment().add(parseInt(gameSettings.duration), "m");
+  const gameStart = moment(gameSettings.start);
+  const gameEnd = gameStart.add(parseInt(gameSettings.duration), "m");
   return dispatch => dispatch({
     type: types.CREATE_GAME,
-    gameEnd,
-    ...gameSettings,
+    data: {
+      ...gameSettings,
+    },
   });
 }

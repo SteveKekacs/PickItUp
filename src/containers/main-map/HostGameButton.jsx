@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import AddIcon from 'material-ui-icons/Add';
@@ -15,6 +16,7 @@ import TextField from 'material-ui/TextField';
 import Switch from 'material-ui/Switch';
 import { FormControlLabel, FormControl } from 'material-ui/Form';
 import { sportToFilter } from '../../utils/constants';
+import { generateId, makeRandomCoords } from '../../utils/helpfulFunctions';
 
 // TODO: Make the icons their own components
 // use styles!!!!
@@ -43,10 +45,12 @@ class HostGameButton extends React.Component {
     this.state = {
       open: false,
       sport: '',
+      level: "intermediate",
       publicGame: true,
-      duration: "",
-      gameStart: "",
-      gameDescription: "",
+      duration: "60",
+      playersNeeded: 2,
+      startTime: moment().format("YYYY-MM-DDTHH:mm"),
+      name: "Your Game Name",
       gameAddress: "",
       useMyLocation: true,
     };
@@ -74,7 +78,25 @@ class HostGameButton extends React.Component {
 
   hostGame() {
     this.handleClose();
-    console.log("Submitting State", this.state);
+    const startTime = moment(this.state.start);
+    const duration = parseInt(this.state.duration);
+    const endTime = startTime.add(duration, "m");
+    const coords = makeRandomCoords();
+    this.props.hostGame({
+      id: generateId(),
+      duration,
+      startTime,
+      endTime,
+      name: this.state.name,
+      sport: this.state.sport || 'basketball',
+      level: this.state.level,
+      creatorId: this.props.userId,
+      playerIds: [this.props.userId],
+      playersNeeded: this.state.playersNeeded,
+      publicGame: this.state.publicGame,
+      position: [coords.lat, coords.lng],
+      ...coords,
+    });
     this.props.gotoCurrentGame();
   }
 
@@ -108,19 +130,19 @@ class HostGameButton extends React.Component {
               <TextField
                 autoFocus
                 margin="dense"
-                id="gameDescription"
+                id="name"
                 label="Game Name"
                 type="text"
-                onChange={this.handleChange('gameDescription')}
+                onChange={this.handleChange('name')}
                 fullWidth
               />
               <TextField
                 fullWidth
-                id="gameStart"
+                id="startTime"
                 label="Set Start Time"
                 type="datetime-local"
-                onChange={this.handleChange('gameStart')}
-                defaultValue=""
+                onChange={this.handleChange('startTime')}
+                defaultValue={this.state.startTime}
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -229,6 +251,8 @@ class HostGameButton extends React.Component {
 HostGameButton.propTypes = {
   classes: PropTypes.object.isRequired,
   gotoCurrentGame: PropTypes.func.isRequired,
+  hostGame: PropTypes.func.isRequired,
+  userId: PropTypes.number.isRequired,
 };
 
 export default withStyles(styles)(HostGameButton);

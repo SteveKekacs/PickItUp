@@ -1,10 +1,14 @@
 import Immutable, { List } from 'immutable';
 import * as actionTypes from '../action-creators/ActionTypes';
+// import * as selectors from '../selectors';
 import initialState from '../initialState';
 
-const initState = Immutable.fromJS(initialState);
+// const initState = Immutable.fromJS(initialState);
 
-export function activities(state = initState, action) {
+const initActivities = Immutable.fromJS(initialState.activites);
+const initUsers = Immutable.fromJS(initialState.users);
+
+export function activities(state = initActivities, action) {
   switch (action.type) {
     case actionTypes.FILTER_ACTIVITIES:
       // set new sports and levels
@@ -19,13 +23,16 @@ export function activities(state = initState, action) {
       //   );
       // }));
     case actionTypes.CREATE_GAME:
-      return state; // .set("allActivities", state.get('allActivities').concat(
+      return state.setIn(
+        ["allActivities", [action.data.id]],
+        Immutable.fromJS(action.data),
+      );
     default:
       return state;
   }
 }
 
-export function users(state = initState, action) {
+export function users(state = initUsers, action) {
   switch(action.type) {
     case actionTypes.GET_USER_INFO:
       // given a user id get all info, including activities

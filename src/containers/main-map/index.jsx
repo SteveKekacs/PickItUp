@@ -9,8 +9,9 @@ import { withStyles } from 'material-ui/styles';
 // import SportIcon from './SportIcon';
 import HostGameButton from './HostGameButton';
 import LeafletMap from './LeafletMap';
-import { getActiveActivities } from '../../selectors';
+import { getActiveActivities, getUserId } from '../../selectors';
 import { gotoCurrentGame } from '../../action-creators/global-actions';
+import { hostGame } from '../../action-creators/actions';
 
 /**************************************************************************************************
  * Connected Host Game
@@ -18,10 +19,15 @@ import { gotoCurrentGame } from '../../action-creators/global-actions';
 
 const mapDispatchToPropsHostGame = dispatch => bindActionCreators({
   gotoCurrentGame,
+  hostGame,
 }, dispatch);
 
+const mapStateToPropsHostGame = state => ({
+  userId: getUserId(state),
+});
+
 const ConnectedHostGame = connect(
-  null,
+  mapStateToPropsHostGame,
   mapDispatchToPropsHostGame,
 )(HostGameButton);
 

@@ -29,7 +29,7 @@ function getRandomArbitrary(min, max) {
   return (Math.random() * (max - min)) + min;
 }
 
-function makeRandomCoords() {
+export function makeRandomCoords() {
   // TODO: find a better bounding box
   const minLat = 42.370892;
   const maxLat = 42.3842314;
@@ -58,6 +58,8 @@ export function makeRandomEvent() {
     creatorId: 1,
     startTime: moment().hours(10).minutes(30),
     endTime: moment().hours(12),
+    publicGame: true,
+    duration: 45,
     level: "intermediate",
     name: "Placeholder's Game",
     ...coords,
@@ -70,14 +72,14 @@ export const generateActivities = () => {
   // Should call make random event
   return ([
     makeRandomEvent(),
-    makeRandomEvent(),
-    makeRandomEvent(),
-    makeRandomEvent(),
-    makeRandomEvent(),
-    makeRandomEvent(),
-    makeRandomEvent(),
-    makeRandomEvent(),
-    makeRandomEvent(),
+    // makeRandomEvent(),
+    // makeRandomEvent(),
+    // makeRandomEvent(),
+    // makeRandomEvent(),
+    // makeRandomEvent(),
+    // makeRandomEvent(),
+    // makeRandomEvent(),
+    // makeRandomEvent(),
   ]);
 };
 
@@ -89,7 +91,7 @@ export const generateUsers = () => {
       last_name: "Kekacs",
       age: 24,
       bio: "Ball is Life!",
-      friendIds: [2, 3]
+      friendIds: [2, 3],
     },
     {
       id: 2,
@@ -97,7 +99,7 @@ export const generateUsers = () => {
       last_name: "Rocca",
       age: 23,
       bio: "Swimming is Life!",
-      friendIds: [1, 3]
+      friendIds: [1, 3],
     },
     {
       id: 3,
@@ -105,7 +107,7 @@ export const generateUsers = () => {
       last_name: "Khandelwal",
       age: 21,
       bio: "All Sports are Life!",
-      friendIds: [1, 2]
+      friendIds: [1, 2],
     },
 
   ]);

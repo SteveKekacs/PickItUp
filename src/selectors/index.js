@@ -13,8 +13,10 @@ const fromImmutableSelector = parentSelector => createSelector(
   state => (state.toJS ? state.toJS() : state),
 );
 
+/**************************************************************************************************
+ * Activity Settings
+ *************************************************************************************************/
 const getActivities = state => state.activities;
-// const getUser = state => state.users;
 
 
 // need this step if we to just to js something
@@ -27,8 +29,13 @@ export const getSelectedLevels = fromImmutableSelector(getImmutableLevels);
 const getImmutableActivities = makeKeyedSelector(getActivities, 'allActivities');
 export const getAllActivities = fromImmutableSelector(getImmutableActivities);
 
-export const getActiveActivities = createSelector(
+export const getAllActivitiesList = createSelector(
   getAllActivities,
+  activities => Object.values(activities),
+);
+
+export const getActiveActivities = createSelector(
+  getAllActivitiesList,
   getSelectedSports,
   getSelectedLevels,
   (activities, selectedSports, selectedLevels) => activities.filter(activity => (
@@ -62,5 +69,20 @@ export const getCurrentActivityStatus = makeKeyedSelector(
 );
 
 
-// Temp
-// export getUser;
+/**************************************************************************************************
+ * User selectors
+ *************************************************************************************************/
+const getUser = state => state.users;
+
+export const getUserId = makeKeyedSelector(
+  getUser,
+  "currentUserId",
+);
+
+export const getUserInfoImmutable = makeKeyedSelector(
+  getUser,
+  "userInfo",
+);
+export const getUserInfo = fromImmutableSelector(getUserInfoImmutable);
+
+
