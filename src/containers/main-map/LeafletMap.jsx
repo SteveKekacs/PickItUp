@@ -33,6 +33,7 @@ class LeafletMap extends React.Component {
   }
 
   render() {
+    const mapURL = "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
     return (
       <Map
         center={[this.state.lat, this.state.lng]}
@@ -42,7 +43,7 @@ class LeafletMap extends React.Component {
       >
         <TileLayer
           attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          url={mapURL}
         />
         {this.props.activities.map(activity => (
           <SportIcon

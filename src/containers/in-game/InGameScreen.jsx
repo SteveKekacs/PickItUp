@@ -8,7 +8,6 @@ import Chip from 'material-ui/Chip';
 import Button from 'material-ui/Button';
 import Avatar from 'material-ui/Avatar';
 import List, { ListItem, ListItemText } from 'material-ui/List';
-import ListSubheader from 'material-ui/List/ListSubheader';
 import { toTitleCase } from '../../utils/helpfulFunctions';
 
 const styles = theme => ({
@@ -38,14 +37,16 @@ const styles = theme => ({
 const InGameScreen = (props) => {
   const spotsLeft = props.playersNeeded - props.playerIds.length;
   const { classes } = props;
-  const participants = props.playerIds.map(player => (
+  const participants = props.players.map(player => (
     <Chip
-      label="Basic Chip"
+      label={`${player.first_name} ${player.last_name}`}
+      key={player.id}
       className={classes.chip}
-      avatar={<Avatar>SK</Avatar>}
+      avatar={<Avatar>{(player.first_name[0] + player.last_name[0]).toUpperCase()}</Avatar>}
       onClick={() => player}
     />
   ));
+  const creator = props.players.filter(player => player.id === props.creatorId)[0];
   return (
     <Grid item xs={12} >
       <Grid container spacing={0}>
@@ -61,7 +62,7 @@ const InGameScreen = (props) => {
             <ListItem divider >
               <ListItemText
                 primary="Host"
-                secondary={`Steven "TODO" Kekacs`}
+                secondary={`${creator.first_name} ${creator.last_name}`}
               />
             </ListItem>
             <ListItem divider >
@@ -82,11 +83,11 @@ const InGameScreen = (props) => {
                 secondary={toTitleCase(props.level)}
               />
             </ListItem>
+            <ListItem style={{ paddingBottom: "0px" }}>
+              <ListItemText primary="Participants" />
+            </ListItem>
             <ListItem>
-              <ListItemText
-                primary="Participants"
-                secondary={<div className={classes.participants}>{participants}</div>}
-              />
+              <div className={classes.participants}>{participants}</div>
             </ListItem>
           </List>
         </Grid>
@@ -114,6 +115,8 @@ InGameScreen.propTypes = {
   playerIds: PropTypes.array.isRequired,
   startTime: PropTypes.object.isRequired,
   endTime: PropTypes.object.isRequired,
+  players: PropTypes.array.isRequired,
+  creatorId: PropTypes.number.isRequired,
 };
 
 export default withStyles(styles)(InGameScreen);

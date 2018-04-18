@@ -100,7 +100,15 @@ const UserBaseInline = props => (
 
 const RewardBaseInline = props => (
   <div className={props.classes.wrapper}>
-    Reward
+    <div className={props.classes.content}>
+      <IconButton 
+          className={props.classes.iconBtn}
+        >
+        <Icon className={props.classes.icon}></Icon>
+      </IconButton>
+      <span className={props.classes.mainText}>{props.data.title}</span>
+      <span className={props.classes.subText}>{props.data.description}</span>
+    </div>
   </div>
 )
 

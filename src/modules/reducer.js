@@ -2,8 +2,7 @@ import Immutable, { List } from 'immutable';
 import * as actionTypes from '../action-creators/ActionTypes';
 // import * as selectors from '../selectors';
 import initialState from '../initialState';
-
-// const initState = Immutable.fromJS(initialState);
+import { randomNum } from '../utils/helpfulFunctions';
 
 const initActivities = Immutable.fromJS(initialState.activites);
 const initUsers = Immutable.fromJS(initialState.users);
@@ -44,9 +43,15 @@ export function users(state = initUsers, action) {
 
       const friends = state.get('users').filter((obj) => friend_ids.includes(obj.get('id')));
 
+      // get rewards
+      const rewards = List([]).set(0, state.getIn(['rewards', randomNum()]))
+        .set(1, state.getIn(['rewards', randomNum()]))
+        .set(2, state.getIn(['rewards', randomNum()]))
+        .set(3, state.getIn(['rewards', randomNum()]))
+
       return state.setIn(['userInfo', 'pastActivities'], pastActivities)
         .setIn(['userInfo', 'friends'], friends)
-        .setIn(['userInfo', 'rewards'], List([])); // TODO: Rewards
+        .setIn(['userInfo', 'rewards'], rewards);
     default:
       return state;
   }

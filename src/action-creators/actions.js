@@ -12,6 +12,10 @@ export function setCurrentGame(id) {
   return { type: types.SET_GAME, id };
 }
 
+// export function addGame(id) {
+//   return { type: types.JOIN_GAME, id };
+// }
+
 export function hostGame(gameSettings) {
   return ({
     type: types.CREATE_GAME,

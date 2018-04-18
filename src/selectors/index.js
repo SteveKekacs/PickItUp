@@ -91,4 +91,26 @@ export const getUserInfoImmutable = makeKeyedSelector(
 );
 export const getUserInfo = fromImmutableSelector(getUserInfoImmutable);
 
+export const getUsersImmutable = makeKeyedSelector(
+  getUser,
+  "users",
+);
+export const getAllUsers = fromImmutableSelector(getUsersImmutable);
+
+
+export const getPlayers = createSelector(
+  getCurrentActivity,
+  getUsersImmutable,
+  (activity, users) => activity.playerIds.map(id => users.get(id).toJS()),
+);
+
+export const getUserDetails = createSelector(
+  getUsersImmutable,
+  getUserId,
+  (users, id) => users.get(id).toJS(),
+);
+
+/**************************************************************************************************
+ * App selectors
+ *************************************************************************************************/
 
