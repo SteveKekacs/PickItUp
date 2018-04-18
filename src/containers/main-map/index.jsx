@@ -11,7 +11,7 @@ import HostGameButton from './HostGameButton';
 import LeafletMap from './LeafletMap';
 import { getActiveActivities, getUserId } from '../../selectors';
 import { gotoCurrentGame } from '../../action-creators/global-actions';
-import { hostGame } from '../../action-creators/actions';
+import { hostGame, setCurrentGame } from '../../action-creators/actions';
 
 /**************************************************************************************************
  * Connected Host Game
@@ -52,6 +52,7 @@ const ConnectedHostGame = connect(
 
 const mapDispatchToPropsMap = dispatch => bindActionCreators({
   gotoGame: gotoCurrentGame,
+  setCurrentGame,
 }, dispatch);
 
 const mapStateToPropsMap = state => ({

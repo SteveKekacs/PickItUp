@@ -24,7 +24,7 @@ const initialState = {
     // visibleActivities: allActivities,
 
     // will be set with activity Info
-    currentActivity: {},
+    currentActivity: null,
 
     // currentActivityStatus: joining/participating/ended
     currentActivityStatus: null,

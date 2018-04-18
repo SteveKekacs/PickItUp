@@ -48,6 +48,7 @@ class LeafletMap extends React.Component {
           <SportIcon
             key={activity.id}
             gotoGame={this.props.gotoGame}
+            setCurrentGame={this.props.setCurrentGame}
             {...activity}
           />
         ))}
@@ -59,6 +60,7 @@ class LeafletMap extends React.Component {
 LeafletMap.propTypes = {
   activities: PropTypes.array.isRequired,
   gotoGame: PropTypes.func.isRequired,
+  setCurrentGame: PropTypes.func.isRequired,
 };
 
 export default LeafletMap;

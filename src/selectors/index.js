@@ -56,11 +56,17 @@ const getImmutablePastActivities = makeKeyedSelector(
 );
 export const getPastActivities = fromImmutableSelector(getImmutablePastActivities);
 
-const getImmutableCurrentActivity = makeKeyedSelector(
+export const getCurrentActivityId = makeKeyedSelector(
   getActivities,
   'currentActivity',
 );
-export const getCurrentActivity = fromImmutableSelector(getImmutableCurrentActivity);
+
+export const getCurrentActivity = createSelector(
+  getCurrentActivityId,
+  getImmutableActivities,
+  (id, activities) => activities.get(id).toJS(),
+);
+// export const getCurrentActivity = fromImmutableSelector(getImmutableCurrentActivity);
 
 // Example of a simple selector
 export const getCurrentActivityStatus = makeKeyedSelector(

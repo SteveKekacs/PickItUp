@@ -97,8 +97,9 @@ class HostGameButton extends React.Component {
     const duration = parseInt(this.state.duration);
     const endTime = moment(this.state.start).add(duration, "m");
     const coords = makeRandomCoords();
+    const id = generateId();
     this.props.hostGame({
-      id: generateId(),
+      id,
       duration,
       startTime,
       endTime,

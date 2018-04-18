@@ -1,4 +1,3 @@
-import moment from 'moment';
 import * as types from './ActionTypes';
 
 export function filterActivities(sports, levels) {
@@ -9,13 +8,13 @@ export function getUserInfo(userId) {
   return { type: types.GET_USER_INFO, userId };
 }
 
+export function setCurrentGame(id) {
+  return { type: types.SET_GAME, id };
+}
+
 export function hostGame(gameSettings) {
-  const gameStart = moment(gameSettings.start);
-  const gameEnd = gameStart.add(parseInt(gameSettings.duration), "m");
-  return dispatch => dispatch({
+  return ({
     type: types.CREATE_GAME,
-    data: {
-      ...gameSettings,
-    },
+    data: { ...gameSettings },
   });
 }

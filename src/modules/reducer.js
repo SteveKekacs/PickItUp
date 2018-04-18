@@ -14,26 +14,20 @@ export function activities(state = initActivities, action) {
       // set new sports and levels
       return state.set('selectedSports', List(action.sports))
         .set('selectedLevels', List(action.levels));
-
-      // filter activities based on selectedSports and selectedLevels
-      // return state.set('visibleActivities', state.get('allActivities').filter((activity) => {
-      //   return (
-      //     (action.sports.length === 0 || action.sports.includes(activity.get('sport'))) &&
-      //     (action.levels.length === 0 || action.levels.includes(activity.get('level')))
-      //   );
-      // }));
     case actionTypes.CREATE_GAME:
       return state.setIn(
-        ["allActivities", [action.data.id]],
+        ["allActivities", action.data.id],
         Immutable.fromJS(action.data),
-      );
+      ).set("currentActivity", action.data.id);
+    case actionTypes.SET_GAME:
+      return state.set("currentActivity", action.id);
     default:
       return state;
   }
 }
 
 export function users(state = initUsers, action) {
-  switch(action.type) {
+  switch (action.type) {
     case actionTypes.GET_USER_INFO:
       // given a user id get all info, including activities
       const userId = parseInt(action.userId);
