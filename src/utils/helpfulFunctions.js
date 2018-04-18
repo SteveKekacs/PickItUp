@@ -58,6 +58,9 @@ export function makeRandomEvent() {
   // this should return
   const coords = makeRandomCoords();
   // TODO: implement
+  // Make it pick random sports
+  // make it pick random players
+  // make it pick a random host
   const sport = pickRandomSport();
   return {
     sport,
@@ -82,14 +85,14 @@ export const generateActivities = () => {
   // Should call make random event
   return ([
     makeRandomEvent(),
-    // makeRandomEvent(),
-    // makeRandomEvent(),
-    // makeRandomEvent(),
-    // makeRandomEvent(),
-    // makeRandomEvent(),
-    // makeRandomEvent(),
-    // makeRandomEvent(),
-    // makeRandomEvent(),
+    makeRandomEvent(),
+    makeRandomEvent(),
+    makeRandomEvent(),
+    makeRandomEvent(),
+    makeRandomEvent(),
+    makeRandomEvent(),
+    makeRandomEvent(),
+    makeRandomEvent(),
   ]);
 };
 
