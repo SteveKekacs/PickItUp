@@ -43,7 +43,10 @@ const SportIcon = (props) => {
             <Button
               fullWidth
               variant="raised"
-              onClick={() => props.gotoGame(props.id)}
+              onClick={() => {
+                props.setCurrentGame(props.id);
+                props.gotoGame();
+              }}
               color="primary"
               autoFocus
             >
@@ -59,6 +62,7 @@ const SportIcon = (props) => {
 SportIcon.propTypes = {
   // classes: PropTypes.object.isRequired,
   gotoGame: PropTypes.func.isRequired,
+  setCurrentGame: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   level: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
