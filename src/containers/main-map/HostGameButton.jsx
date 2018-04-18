@@ -15,7 +15,11 @@ import Input, { InputLabel } from 'material-ui/Input';
 import TextField from 'material-ui/TextField';
 import Switch from 'material-ui/Switch';
 import { FormControlLabel, FormControl } from 'material-ui/Form';
-import { sportToFilter } from '../../utils/constants';
+// import { sportToFilter, level } from '../../utils/constants';
+import {
+  sportToFilter,
+  skillLevels,
+} from '../../utils/constants';
 import { generateId, makeRandomCoords } from '../../utils/helpfulFunctions';
 
 // TODO: Make the icons their own components
@@ -32,10 +36,21 @@ const styles = theme => ({
     display: 'flex',
     flexWrap: 'wrap',
   },
-  formControl: {
-    // margin: theme.spacing.unit,
-    width: "100%",
-
+  // formControl: {
+  //   margin: theme.spacing.unit,
+  //   width: "calc(50% - 16px)",
+  // },
+  formControlRight: {
+    marginRight: theme.spacing.unit,
+    marginTop: theme.spacing.unit,
+    marginBottom: theme.spacing.unit,
+    width: `calc(50% - ${theme.spacing.unit}px)`,
+  },
+  formControlLeft: {
+    marginLeft: theme.spacing.unit,
+    marginTop: theme.spacing.unit,
+    marginBottom: theme.spacing.unit,
+    width: `calc(50% - ${theme.spacing.unit}px)`,
   },
 });
 
@@ -44,14 +59,14 @@ class HostGameButton extends React.Component {
     super(props);
     this.state = {
       open: false,
-      sport: '',
-      level: "intermediate",
+      sport: 'basketball',
+      level: "beginner",
       publicGame: true,
       duration: "60",
       playersNeeded: 2,
       startTime: moment().format("YYYY-MM-DDTHH:mm"),
       name: "Your Game Name",
-      gameAddress: "",
+      // gameAddress: "",
       useMyLocation: true,
     };
     this.handleClickOpen = this.handleClickOpen.bind(this);
@@ -80,7 +95,7 @@ class HostGameButton extends React.Component {
     this.handleClose();
     const startTime = moment(this.state.start);
     const duration = parseInt(this.state.duration);
-    const endTime = startTime.add(duration, "m");
+    const endTime = moment(this.state.start).add(duration, "m");
     const coords = makeRandomCoords();
     this.props.hostGame({
       id: generateId(),
@@ -147,7 +162,7 @@ class HostGameButton extends React.Component {
                   shrink: true,
                 }}
               />
-              <FormControl className={classes.formControl}>
+              <FormControl className={classes.formControlRight}>
                 <InputLabel htmlFor="sport-duration">
                   Set Duration
                 </InputLabel>
@@ -175,8 +190,29 @@ class HostGameButton extends React.Component {
                   </option>
                 </Select>
               </FormControl>
-              <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="sport-native-simple">
+              <FormControl className={classes.formControlLeft}>
+                <InputLabel htmlFor="difficulty-switch">
+                  Difficulty
+                </InputLabel>
+                <Select
+                  native
+                  value={this.state.level}
+                  onChange={this.handleChange('level')}
+                  input={<Input id="difficulty-switch" />}
+                >
+                  {Object.entries(skillLevels).map(([displayName, slug]) => (
+                    <option
+                      key={slug}
+                      value={slug}
+                      onClick={this.handleChange('level')}
+                    >
+                      {displayName}
+                    </option>
+                  ))}
+                </Select>
+              </FormControl>
+              <FormControl className={classes.formControlRight}>
+                <InputLabel htmlFor="sport">
                   Pick Sport
                 </InputLabel>
                 <Select
@@ -199,6 +235,18 @@ class HostGameButton extends React.Component {
                       ))}
                 </Select>
               </FormControl>
+              <TextField
+                className={classes.formControlLeft}
+                id="number-players"
+                label="Players"
+                type="number"
+                name="playersNeeded"
+                onChange={this.handleChange('playersNeeded')}
+                defaultValue={this.state.playersNeeded}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
               <FormControlLabel
                 control={
                   <Switch
