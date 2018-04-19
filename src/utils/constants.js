@@ -4,21 +4,39 @@ import { Icon } from 'leaflet';
 import basketballImg from '../images/basketball.png';
 import soccerImg from '../images/soccer.ico';
 import tennisImg from '../images/tennisball.png';
+import footballImg from '../images/football.png';
+import baseballImg from '../images/baseball.png';
 
 export const sportsList = [
   "Baseball",
   "Basketball",
-  "Boxing",
-  "Cycling",
-  "Darthmouth",
+  //"Boxing",
+  //"Cycling",
+  //"Dartmouth",
   "Football",
-  "Golf",
-  "Hockey",
+  //"Golf",
+  // "Hockey",
   "Soccer",
-  "Swimming",
-  "Table Tennis",
+  // "Swimming",
+  // "Table Tennis",
   "Tennis",
-  "Volleyball",
+  // "Volleyball",
+];
+
+export const sportsiconlist = [
+  "baseball",
+  "basketball",
+  //"Boxing",
+  //"Cycling",
+  //"Dartmouth",
+  "football",
+  //"Golf",
+  // "Hockey",
+  "soccer",
+  // "Swimming",
+  // "Table Tennis",
+  "tennis",
+  // "Volleyball",
 ];
 
 export const levelsList = [
@@ -33,7 +51,7 @@ export const sportToFilter = {
   Basketball: "basketball",
   Boxing: "boxing",
   Cycling: "cycling",
-  Darthmouth: "darthmouth",
+  Dartmouth: "dartmouth",
   Football: "football",
   Golf: "golf",
   Hockey: "hockey",
@@ -43,6 +61,8 @@ export const sportToFilter = {
   Tennis: "tennis",
   Volleyball: "volleyball",
 };
+
+// TODO: CREATE SPORTS SLUGS 
 
 export const skillLevels = {
   All: "all_levels",
@@ -68,7 +88,17 @@ const soccerIcon = new Icon({
 
 const tennisIcon = new Icon({
   iconUrl: tennisImg,
+  iconSize: [23, 23],
+});
+
+const footballIcon = new Icon({
+  iconUrl: footballImg,
   iconSize: [20, 20],
+});
+
+const baseballIcon = new Icon({
+  iconUrl: baseballImg,
+  iconSize: [25, 25],
 });
 
 // then we want something like this so we can map sport id to
@@ -77,4 +107,6 @@ export const sportToIcon = {
   basketball: basketballIcon,
   soccer: soccerIcon,
   tennis: tennisIcon,
+  football: footballIcon,
+  baseball: baseballIcon,
 };

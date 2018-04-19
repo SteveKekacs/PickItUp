@@ -1,5 +1,5 @@
 import moment from "moment";
-import { sportsList } from "./constants"
+import { sportsiconlist } from "./constants"
 
 /**************************************************************************************************
  * General Purpose functions
@@ -43,14 +43,16 @@ function makeRandomCoords() {
 }
 
 // TODO: implement
-const pickRandomSport = () => 'tennis';
+const pickRandomSport = (lst) => {
+  return lst[Math.floor(Math.random() * lst.length)];
+}
 
 // THIS ONE SHOULD BE IMPROVED
 export function makeRandomEvent() {
   // this should return
   const coords = makeRandomCoords();
   // TODO: implement
-  const sport = pickRandomSport();
+  const sport = pickRandomSport(sportsiconlist);
   return {
     sport,
     id: generateId(),
