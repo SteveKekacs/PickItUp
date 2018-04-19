@@ -1,4 +1,5 @@
 import moment from "moment";
+import { sportsSlugs } from "./constants"
 
 /**************************************************************************************************
  * General Purpose functions
@@ -51,17 +52,18 @@ export function makeRandomCoords() {
   };
 }
 
-const pickRandomSport = () => 'basketball';
+// TODO: implement
+const pickRandomSport = lst => lst[Math.floor(Math.random() * lst.length)];
 
 // THIS ONE SHOULD BE IMPROVED
 export function makeRandomEvent() {
   // this should return
   const coords = makeRandomCoords();
   // TODO: implement
+  const sport = pickRandomSport(sportsSlugs);
   // Make it pick random sports
   // make it pick random players
   // make it pick a random host
-  const sport = pickRandomSport();
   return {
     sport,
     id: generateId(),
