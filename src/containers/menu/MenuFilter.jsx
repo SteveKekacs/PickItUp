@@ -1,26 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { withStyles } from 'material-ui/styles';
 import Menu, { MenuItem } from 'material-ui/Menu';
 import { ListItemText } from 'material-ui/List';
 import Select from 'material-ui/Select';
 import Checkbox from 'material-ui/Checkbox';
-import { FormControl, FormHelperText } from 'material-ui/Form';
+import { FormControl } from 'material-ui/Form';
 import Input, { InputLabel } from 'material-ui/Input';
 import IconButton from 'material-ui/IconButton';
 import Icon from 'material-ui/Icon';
-
-// connecting to store
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-
-import { sportsList, levelsList } from '../../utils/constants';
-
-import * as actions from '../../action-creators/actions'
+import { getSelectedSports, getSelectedLevels } from '../../selectors';
+import { levelsSlugs, sportsSlugs, filterToSport, filterToLevel } from '../../utils/constants';
+import * as actions from '../../action-creators/actions';
 
 const styles = {
   icons: {
     paddingRight: 5,
+  },
+  filter: {
+    width: "calc(100% - 16px)",
+    marginLeft: 8,
+    marginRight: 8,
   },
 };
 
@@ -29,7 +31,7 @@ class MenuFilter extends React.Component {
     super(props);
 
     this.state = {
-      anchorEl: null
+      anchorEl: null,
     };
 
     this.eltId = "menu-filter";
@@ -60,54 +62,64 @@ class MenuFilter extends React.Component {
         >
           <Icon>filter_list</Icon>
         </IconButton>
-
         <Menu
           id={this.eltId}
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
           onClose={this.handleClose}
         >
-
           <MenuItem onClick={this.gotoMainMap}>
             <Icon className={classes.icons}>filter_list</Icon>
-            Filter Activities
+            Filter Sports and/or Skill Level
           </MenuItem>
-          
-          <FormControl>
-            <InputLabel htmlFor="sport-filter">Sports</InputLabel>
-            <Select 
+          <FormControl className={this.props.classes.filter}>
+            <InputLabel htmlFor="sport-filter">Sports (leave empty for all)</InputLabel>
+            <Select
               multiple
               value={this.props.selectedSports}
-              onChange={(event) => this.props.filterActivities(event.target.value, this.props.selectedLevels)}
-              input={<Input id="sport-filter" />}
-              renderValue={selected => selected.join(', ')}
-            >
-              { sportsList.map((sport) => (
-                  <MenuItem key={sport} value={sport}>
-                    <Checkbox checked={this.props.selectedSports.indexOf(sport) > -1} />
-                    <ListItemText primary={sport} />
-                  </MenuItem>
-                )
+              onChange={event => this.props.filterActivities(
+                event.target.value,
+                this.props.selectedLevels,
               )}
+              input={<Input id="sport-filter" />}
+              renderValue={selected => (
+                  selected.length > 0 ?
+                  selected.map(s => filterToSport[s]).join(', ')
+                  : ""
+              )}
+            >
+              {sportsSlugs.map(sportSlug => (
+                <MenuItem key={sportSlug} value={sportSlug}>
+                  <Checkbox checked={this.props.selectedSports.indexOf(sportSlug) > -1} />
+                  <ListItemText primary={filterToSport[sportSlug]} />
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
-
-          <FormControl>
-            <InputLabel htmlFor="level-filter">Skill Levels</InputLabel>
-            <Select 
+          <FormControl className={this.props.classes.filter}>
+            <InputLabel htmlFor="level-filter">
+              Skill Levels (leave empty for all)
+            </InputLabel>
+            <Select
               multiple
               value={this.props.selectedLevels}
-              onChange={(event) => this.props.filterActivities(this.props.selectedSports, event.target.value)}
               input={<Input id="level-filter" />}
-              renderValue={selected => selected.join(', ')}
-            >
-              { levelsList.map((level) => (
-                  <MenuItem key={level} value={level}>
-                    <Checkbox checked={this.props.selectedLevels.indexOf(level) > -1} />
-                    <ListItemText primary={level} />
-                  </MenuItem>
-                )
+              renderValue={selected => (
+                  selected.length > 0 ?
+                  selected.map(s => filterToLevel[s]).join(', ')
+                  : ""
               )}
+              onChange={event => this.props.filterActivities(
+                this.props.selectedSports,
+                event.target.value,
+              )}
+            >
+              {levelsSlugs.map(slug => (
+                <MenuItem key={slug} value={slug}>
+                  <Checkbox checked={this.props.selectedLevels.indexOf(slug) > -1} />
+                  <ListItemText primary={filterToLevel[slug]} />
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
 
@@ -115,32 +127,28 @@ class MenuFilter extends React.Component {
 
       </div>
     );
-  };
-};
+  }
+}
 
 MenuFilter.propTypes = {
-  classes: PropTypes.object.isRequired,  
+  classes: PropTypes.object.isRequired,
   selectedSports: PropTypes.array.isRequired,
   selectedLevels: PropTypes.array.isRequired,
-  filterActivities: PropTypes.func.isRequired
+  filterActivities: PropTypes.func.isRequired,
 };
 
-function mapStateToProps(state) {
-  return {
-    selectedSports: state.activities.get('selectedSports').toJS(),
-    selectedLevels: state.activities.get('selectedLevels').toJS()
-  };
-};
+const mapStateToProps = state => ({
+  selectedSports: getSelectedSports(state),
+  selectedLevels: getSelectedLevels(state),
+});
 
-function mapDispatchToProps(dispatch) {
-  return {
-    filterActivities: bindActionCreators(actions.filterActivities, dispatch)
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  filterActivities: bindActionCreators(actions.filterActivities, dispatch),
+});
 
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(withStyles(styles)(MenuFilter));
 

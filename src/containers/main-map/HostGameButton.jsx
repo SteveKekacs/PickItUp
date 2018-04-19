@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import AddIcon from 'material-ui-icons/Add';
@@ -9,11 +10,17 @@ import Dialog, {
   DialogContentText,
   DialogTitle,
 } from 'material-ui/Dialog';
-import { FormControl } from 'material-ui/Form';
 import Select from 'material-ui/Select';
 import Input, { InputLabel } from 'material-ui/Input';
 import TextField from 'material-ui/TextField';
-import { sportToFilter } from '../../utils/constants';
+import Switch from 'material-ui/Switch';
+import { FormControlLabel, FormControl } from 'material-ui/Form';
+// import { sportToFilter, level } from '../../utils/constants';
+import {
+  sportToFilter,
+  skillLevels,
+} from '../../utils/constants';
+import { generateId, makeRandomCoords } from '../../utils/helpfulFunctions';
 
 // TODO: Make the icons their own components
 // use styles!!!!
@@ -29,10 +36,21 @@ const styles = theme => ({
     display: 'flex',
     flexWrap: 'wrap',
   },
-  formControl: {
-    // margin: theme.spacing.unit,
-    width: "100%",
-
+  // formControl: {
+  //   margin: theme.spacing.unit,
+  //   width: "calc(50% - 16px)",
+  // },
+  formControlRight: {
+    marginRight: theme.spacing.unit,
+    marginTop: theme.spacing.unit,
+    marginBottom: theme.spacing.unit,
+    width: `calc(50% - ${theme.spacing.unit}px)`,
+  },
+  formControlLeft: {
+    marginLeft: theme.spacing.unit,
+    marginTop: theme.spacing.unit,
+    marginBottom: theme.spacing.unit,
+    width: `calc(50% - ${theme.spacing.unit}px)`,
   },
 });
 
@@ -41,19 +59,30 @@ class HostGameButton extends React.Component {
     super(props);
     this.state = {
       open: false,
-      sport: '',
-      duration: "",
+      sport: 'basketball',
+      level: "beginner",
+      publicGame: true,
+      duration: "60",
+      playersNeeded: 2,
+      startTime: moment().format("YYYY-MM-DDTHH:mm"),
+      name: "Your Game Name",
+      // gameAddress: "",
+      useMyLocation: true,
     };
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.hostGame = this.hostGame.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
   }
 
   handleChange(name) {
     return event => this.setState({ [name]: event.target.value });
   }
 
+  handleToggle(name) {
+    return event => this.setState({ [name]: event.target.checked });
+  }
   handleClickOpen() {
     this.setState({ open: true });
   }
@@ -64,6 +93,26 @@ class HostGameButton extends React.Component {
 
   hostGame() {
     this.handleClose();
+    const startTime = moment(this.state.start);
+    const duration = parseInt(this.state.duration);
+    const endTime = moment(this.state.start).add(duration, "m");
+    const coords = makeRandomCoords();
+    const id = generateId();
+    this.props.hostGame({
+      id,
+      duration,
+      startTime,
+      endTime,
+      name: this.state.name,
+      sport: this.state.sport || 'basketball',
+      level: this.state.level,
+      creatorId: this.props.userId,
+      playerIds: [this.props.userId],
+      playersNeeded: this.state.playersNeeded,
+      publicGame: this.state.publicGame,
+      position: [coords.lat, coords.lng],
+      ...coords,
+    });
     this.props.gotoCurrentGame();
   }
 
@@ -100,20 +149,24 @@ class HostGameButton extends React.Component {
                 id="name"
                 label="Game Name"
                 type="text"
+                onChange={this.handleChange('name')}
                 fullWidth
               />
               <TextField
                 fullWidth
-                id="datetime-local"
+                id="startTime"
                 label="Set Start Time"
                 type="datetime-local"
-                defaultValue={""}
+                onChange={this.handleChange('startTime')}
+                defaultValue={this.state.startTime}
                 InputLabelProps={{
                   shrink: true,
                 }}
               />
-              <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="sport-duration">Set Duration</InputLabel>
+              <FormControl className={classes.formControlRight}>
+                <InputLabel htmlFor="sport-duration">
+                  Set Duration
+                </InputLabel>
                 <Select
                   native
                   value={this.state.duration}
@@ -138,8 +191,31 @@ class HostGameButton extends React.Component {
                   </option>
                 </Select>
               </FormControl>
-              <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="sport-native-simple">Pick Sport</InputLabel>
+              <FormControl className={classes.formControlLeft}>
+                <InputLabel htmlFor="difficulty-switch">
+                  Difficulty
+                </InputLabel>
+                <Select
+                  native
+                  value={this.state.level}
+                  onChange={this.handleChange('level')}
+                  input={<Input id="difficulty-switch" />}
+                >
+                  {Object.entries(skillLevels).map(([displayName, slug]) => (
+                    <option
+                      key={slug}
+                      value={slug}
+                      onClick={this.handleChange('level')}
+                    >
+                      {displayName}
+                    </option>
+                  ))}
+                </Select>
+              </FormControl>
+              <FormControl className={classes.formControlRight}>
+                <InputLabel htmlFor="sport">
+                  Pick Sport
+                </InputLabel>
                 <Select
                   native
                   value={this.state.sport}
@@ -147,13 +223,64 @@ class HostGameButton extends React.Component {
                   input={<Input id="sport-native-simple" />}
                 >
                   <option value="" />
-                  { Object.entries(sportToFilter).map(([sportName, sportSlug]) => (
-                    <option key={sportSlug} value={sportSlug} onClick={this.handleChange('sport')}>
-                      {sportName}
-                    </option>
-                  ))}
+                  {Object.entries(sportToFilter)
+                      .filter(([, sportSlug]) => sportSlug !== "all_sports")
+                      .map(([sportName, sportSlug]) => (
+                        <option
+                          key={sportSlug}
+                          value={sportSlug}
+                          onClick={this.handleChange('sport')}
+                        >
+                          {sportName}
+                        </option>
+                      ))}
                 </Select>
               </FormControl>
+              <TextField
+                className={classes.formControlLeft}
+                id="number-players"
+                label="Players"
+                type="number"
+                name="playersNeeded"
+                onChange={this.handleChange('playersNeeded')}
+                defaultValue={this.state.playersNeeded}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={this.state.publicGame}
+                    onChange={this.handleToggle('publicGame')}
+                    value="publicGame"
+                  />
+                }
+                label="Make Game Public"
+              />
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={this.state.useMyLocation}
+                    onChange={this.handleToggle('useMyLocation')}
+                    value="useMyLocation"
+                  />
+                }
+                label="Start Game at My Current Location"
+              />
+              {!this.state.useMyLocation && (
+                <TextField
+                  fullWidth
+                  id="gameAddress"
+                  label="Set Game Address"
+                  type="text"
+                  onChange={this.handleChange('gameAddress')}
+                  defaultValue=""
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              )}
             </form>
           </DialogContent>
           <DialogActions>
@@ -173,6 +300,8 @@ class HostGameButton extends React.Component {
 HostGameButton.propTypes = {
   classes: PropTypes.object.isRequired,
   gotoCurrentGame: PropTypes.func.isRequired,
+  hostGame: PropTypes.func.isRequired,
+  userId: PropTypes.number.isRequired,
 };
 
 export default withStyles(styles)(HostGameButton);

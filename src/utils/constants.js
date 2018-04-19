@@ -7,7 +7,27 @@ import tennisImg from '../images/tennisball.png';
 import footballImg from '../images/football.png';
 import baseballImg from '../images/baseball.png';
 
-export const sportsList = [
+
+// Skills
+export const skillLevels = {
+  // All: "all_levels",
+  Beginner: "beginner",
+  Intermediate: "intermediate",
+  Advanced: "advanced",
+};
+
+export const filterToLevel = Object.entries(skillLevels).reduce(
+  (acc, [name, slug]) => ({ [slug]: name, ...acc }),
+  {},
+);
+export const levelsSlugs = [
+  "beginner",
+  "intermediate",
+  "advanced",
+];
+export const levelsList = levelsSlugs.map(l => filterToLevel[l]);
+
+export const sportsWithIcons = [
   "Baseball",
   "Basketball",
   //"Boxing",
@@ -22,54 +42,31 @@ export const sportsList = [
   "Tennis",
   // "Volleyball",
 ];
-
-export const sportsiconlist = [
-  "baseball",
-  "basketball",
-  //"Boxing",
-  //"Cycling",
-  //"Dartmouth",
-  "football",
-  //"Golf",
-  // "Hockey",
-  "soccer",
-  // "Swimming",
-  // "Table Tennis",
-  "tennis",
-  // "Volleyball",
-];
-
-export const levelsList = [
-  "Beginner",
-  "Intermediate",
-  "Advanced",
-];
-
+// Sports
 export const sportToFilter = {
-  All: "all_sports",
+  // All: "all_sports",
   Baseball: "baseball",
   Basketball: "basketball",
-  Boxing: "boxing",
-  Cycling: "cycling",
-  Dartmouth: "dartmouth",
+  // Boxing: "boxing",
+  // Cycling: "cycling",
+  // Dartmouth: "dartmouth",
   Football: "football",
-  Golf: "golf",
-  Hockey: "hockey",
+  // Golf: "golf",
+  // Hockey: "hockey",
   Soccer: "soccer",
-  Swimming: "swimming",
-  "Table Tennis": "table_tennis",
+  // Swimming: "swimming",
+  // "Table Tennis": "table_tennis",
   Tennis: "tennis",
-  Volleyball: "volleyball",
+  // Volleyball: "volleyball",
 };
 
-// TODO: CREATE SPORTS SLUGS 
-
-export const skillLevels = {
-  All: "all_levels",
-  Beginner: "beginner",
-  Intermediate: "intermediate",
-  Advanced: "advanced",
-};
+// TODO: CREATE SPORTS SLUGS
+export const filterToSport = Object.entries(sportToFilter).reduce(
+  (acc, [name, slug]) => ({ [slug]: name, ...acc }),
+  {},
+);
+export const sportsList = Object.keys(sportToFilter).sort();
+export const sportsSlugs = Object.values(sportToFilter).sort();
 
 /**************************************************************************************************
  * Sport Mappings
