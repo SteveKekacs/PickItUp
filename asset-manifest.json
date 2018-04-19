@@ -1,11 +1,15 @@
 {
   "main.css": "static/css/main.65027555.css",
   "main.css.map": "static/css/main.65027555.css.map",
-  "main.js": "static/js/main.7f511f25.js",
-  "main.js.map": "static/js/main.7f511f25.js.map",
+  "main.js": "static/js/main.2e902619.js",
+  "main.js.map": "static/js/main.2e902619.js.map",
   "static/media/PickItUp.png": "static/media/PickItUp.1b765f59.png",
+  "static/media/baseball.png": "static/media/baseball.4ed97803.png",
   "static/media/basketball.png": "static/media/basketball.42c153f9.png",
+  "static/media/football.png": "static/media/football.f1fd8f1b.png",
   "static/media/manav.jpg": "static/media/manav.0665a930.jpg",
+  "static/media/soccer.ico": "static/media/soccer.35089be0.ico",
   "static/media/steve.png": "static/media/steve.4d0af466.png",
+  "static/media/tennisball.png": "static/media/tennisball.f3c7ff43.png",
   "static/media/tyler.png": "static/media/tyler.44ac47a7.png"
 }
