@@ -32,16 +32,22 @@ export function users(state = initUsers, action) {
       const userId = parseInt(action.userId);
 
       // get basic user info
-      state = state.set('userInfo', state.get('users').find((obj) => obj.get('id') === userId));
+      state = state.set(
+        'userInfo',
+        state.get('users').find((obj) => obj.get('id') === userId)
+      );
 
       // now get activities, friends and TODO: rewards
-      const pastActivities = state.get('allActivities').filter((obj) => obj.get('playerIds').toJS().includes(userId));
+      // HACK!
+      const pastActivities = state.get('allActivities')
+        .filter((obj) => obj.get('playerIds').toJS().includes(userId));
 
       const friend_ids = state.get('users')
         .find((obj) => obj.get('id') === userId)
         .get('friendIds').toJS();
 
-      const friends = state.get('users').filter((obj) => friend_ids.includes(obj.get('id')));
+      const friends = state.get('users')
+        .filter((obj) => friend_ids.includes(obj.get('id')));
 
       // get rewards
       const rewards = List([]).set(0, state.getIn(['rewards', randomNum()]))

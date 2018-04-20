@@ -34,6 +34,8 @@ const initialState = {
     // list of all users on app
     users: generateUsers(),
 
+    allActivities,
+
     // id of user on app
     currentUserId: 1,
 
@@ -43,10 +45,9 @@ const initialState = {
       rewards: [],
       pastActivities: [],
     },
+    // fake rewards all users can draw from
+    rewards: generateRewards(),
   },
-
-  // fake rewards all users can draw from
-  rewards: generateRewards(),
 };
 
 export default initialState;
