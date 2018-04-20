@@ -15,6 +15,7 @@ function mapStateToProps(state) {
   return {
     userId: state.users.get('currentUserId'),
     items: state.users.getIn(['userInfo', 'rewards']).toJS(),
+    // items: state.rewards.toJS(),
     itemType: "reward"
   };
 };
