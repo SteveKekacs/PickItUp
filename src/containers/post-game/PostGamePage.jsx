@@ -72,14 +72,20 @@ const PostGamePage = (props) => {
             </ListItem>
             <ListItem divider >
               <ListItemText
+                primary="Difficulty"
+                secondary={toTitleCase(props.level)}
+              />
+            </ListItem>
+            <ListItem divider >
+              <ListItemText
                 primary="Calories Burned"
                 secondary={420}
               />
             </ListItem>
             <ListItem divider >
               <ListItemText
-                primary="Difficulty"
-                secondary={toTitleCase(props.level)}
+                primary="Reward"
+                secondary={"Congrats! You earned 20% off your next purchase at Jamba Juice!"}
               />
             </ListItem>
             <ListItem style={{ paddingBottom: "0px" }}>
@@ -97,7 +103,7 @@ const PostGamePage = (props) => {
             variant="raised"
             color="primary"
           >
-            Finish Game
+            Return To Main Map
           </Button>
         </Grid>
       </Grid>
