@@ -76,7 +76,7 @@ export function makeRandomEvent() {
     publicGame: true,
     duration: 45,
     level: "intermediate",
-    name: "Placeholder's Game",
+    name: "Sports with Steve",
     ...coords,
   };
 }
