@@ -69,6 +69,16 @@ const styles = theme => ({
   },
   removeIcon: {
     color: 'red'
+  },
+  codeIconBtn: {
+    border: `2px solid ${theme.palette.text.primary}`,
+    borderRadius: '100%',
+    width: '40px',
+    height: '40px'
+
+  },
+  codeIcon: {
+    color: theme.palette.text.primary
   }
 })
 
@@ -104,10 +114,15 @@ const RewardBaseInline = props => (
       <IconButton 
           className={props.classes.iconBtn}
         >
-        <Icon className={props.classes.icon}></Icon>
+        <Icon className={props.classes.icon}>card_membership</Icon>
       </IconButton>
       <span className={props.classes.mainText}>{props.data.title}</span>
       <span className={props.classes.subText}>{props.data.description}</span>
+      <IconButton 
+          className={props.classes.codeIconBtn}
+        >
+        <Icon className={props.classes.codeIcon}>code</Icon>
+      </IconButton>
     </div>
   </div>
 )
