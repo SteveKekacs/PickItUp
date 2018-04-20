@@ -75,7 +75,7 @@ const styles = theme => ({
 const UserBaseInline = props => (
   <div className={props.classes.wrapper}>
     <div className={props.classes.content}>
-      <IconButton 
+      <IconButton
           className={props.classes.iconBtn}
           onClick={() => props.gotoProfile(props.data.id)}
         >
@@ -84,12 +84,12 @@ const UserBaseInline = props => (
       <span className={props.classes.nameText}>{props.data.first_name} {props.data.last_name}</span>
     </div>
     <div className={props.classes.actionIcons}>
-      <IconButton 
+      <IconButton
           className={props.classes.msgIconBtn}
         >
         <Icon className={props.classes.msgIcon}>message</Icon>
       </IconButton>
-      <IconButton 
+      <IconButton
           className={props.classes.removeIconBtn}
         >
         <Icon className={props.classes.removeIcon}>clear</Icon>
@@ -101,7 +101,7 @@ const UserBaseInline = props => (
 const RewardBaseInline = props => (
   <div className={props.classes.wrapper}>
     <div className={props.classes.content}>
-      <IconButton 
+      <IconButton
           className={props.classes.iconBtn}
         >
         <Icon className={props.classes.icon}></Icon>
@@ -113,11 +113,9 @@ const RewardBaseInline = props => (
 )
 
 const ActivityBaseInline = props => (
-  <div className={props.classes.wrapper}>
+  <div className={props.classes.wrapper} onClick={props.handleClick}>
     <div className={props.classes.content}>
-      <IconButton 
-          className={props.classes.iconBtn}
-        >
+      <IconButton className={props.classes.iconBtn} >
         <Icon className={props.classes.icon}>group_work</Icon>
       </IconButton>
       <span className={props.classes.mainText}>{props.data.name}</span>
