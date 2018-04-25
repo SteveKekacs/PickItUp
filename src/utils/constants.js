@@ -1,11 +1,12 @@
 import { Icon } from 'leaflet';
 // TODO: @manav create a list of icons - probably need some sort of mapping to the sports - that
 // should live in the ./constants.js file but rn this is an example
-import basketballImg from '../images/basketball.png';
-import soccerImg from '../images/soccer.ico';
-import tennisImg from '../images/tennisball.png';
-import footballImg from '../images/football.png';
-import baseballImg from '../images/baseball.png';
+import basketballImg from '../images/basketball2.svg';
+import baseballImg from '../images/baseball-svg.svg';
+import footballImg from '../images/football-svg.svg';
+import tennisImg from '../images/tennis-svg.svg';
+import tableTennisImg from '../images/table-tennis-svg.svg';
+import soccerImg from '../images/soccer-svg.svg';
 
 
 // Skills
@@ -38,7 +39,7 @@ export const sportsWithIcons = [
   // "Hockey",
   "Soccer",
   // "Swimming",
-  // "Table Tennis",
+  "Table Tennis",
   "Tennis",
   // "Volleyball",
 ];
@@ -55,7 +56,7 @@ export const sportToFilter = {
   // Hockey: "hockey",
   Soccer: "soccer",
   // Swimming: "swimming",
-  // "Table Tennis": "table_tennis",
+  "Table Tennis": "table_tennis",
   Tennis: "tennis",
   // Volleyball: "volleyball",
 };
@@ -75,26 +76,31 @@ export const sportsSlugs = Object.values(sportToFilter).sort();
 // for each sport the following should be done
 const basketballIcon = new Icon({
   iconUrl: basketballImg,
-  iconSize: [20, 20], // size of the icon - think this is the pixel scaling
+  iconSize: [25, 25], // size of the icon - think this is the pixel scaling
 });
 
 const soccerIcon = new Icon({
   iconUrl: soccerImg,
-  iconSize: [20, 20],
+  iconSize: [25, 25],
 });
 
 const tennisIcon = new Icon({
   iconUrl: tennisImg,
-  iconSize: [23, 23],
+  iconSize: [25, 25],
 });
 
 const footballIcon = new Icon({
   iconUrl: footballImg,
-  iconSize: [20, 20],
+  iconSize: [25, 25],
 });
 
 const baseballIcon = new Icon({
   iconUrl: baseballImg,
+  iconSize: [25, 25],
+});
+
+const tableTennisIcon = new Icon({
+  iconUrl: tableTennisImg,
   iconSize: [25, 25],
 });
 
@@ -106,4 +112,5 @@ export const sportToIcon = {
   tennis: tennisIcon,
   football: footballIcon,
   baseball: baseballIcon,
+  table_tennis: tableTennisIcon,
 };
