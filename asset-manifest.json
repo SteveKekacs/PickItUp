@@ -1,15 +1,17 @@
 {
   "main.css": "static/css/main.65027555.css",
   "main.css.map": "static/css/main.65027555.css.map",
-  "main.js": "static/js/main.f1e14f65.js",
-  "main.js.map": "static/js/main.f1e14f65.js.map",
+  "main.js": "static/js/main.89649563.js",
+  "main.js.map": "static/js/main.89649563.js.map",
   "static/media/PickItUp.png": "static/media/PickItUp.1b765f59.png",
-  "static/media/baseball.png": "static/media/baseball.4ed97803.png",
+  "static/media/baseball-svg.svg": "static/media/baseball-svg.4ffd0bf5.svg",
   "static/media/basketball.png": "static/media/basketball.42c153f9.png",
-  "static/media/football.png": "static/media/football.f1fd8f1b.png",
+  "static/media/basketball2.svg": "static/media/basketball2.9b488224.svg",
+  "static/media/football-svg.svg": "static/media/football-svg.a93a085f.svg",
   "static/media/manav.jpg": "static/media/manav.0665a930.jpg",
-  "static/media/soccer.ico": "static/media/soccer.35089be0.ico",
+  "static/media/soccer-svg.svg": "static/media/soccer-svg.1ee19295.svg",
   "static/media/steve.png": "static/media/steve.4d0af466.png",
-  "static/media/tennisball.png": "static/media/tennisball.f3c7ff43.png",
+  "static/media/table-tennis-svg.svg": "static/media/table-tennis-svg.e777f1b5.svg",
+  "static/media/tennis-svg.svg": "static/media/tennis-svg.1c3fa325.svg",
   "static/media/tyler.png": "static/media/tyler.44ac47a7.png"
 }
