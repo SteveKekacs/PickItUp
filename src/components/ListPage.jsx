@@ -18,7 +18,6 @@ const styles = theme => ({
 class ListPage extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       searchTerm: "",
     };
@@ -56,6 +55,7 @@ class ListPage extends React.Component {
           />))
       );
     }
+    return null;
   }
 
   render() {
