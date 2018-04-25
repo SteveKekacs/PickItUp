@@ -1,9 +1,12 @@
-import ListPage from '../../components/ListPage';
-import * as actions from '../../action-creators/actions'
-
 // connecting to store
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+
+import ListPage from '../../components/ListPage';
+import * as actions from '../../action-creators/actions'
+import { setCurrentGame } from '../../action-creators/actions';
+import { gotoPostGame } from '../../action-creators/global-actions';
+
 
 class ActivitiesList extends ListPage {
   componentDidMount() {
@@ -21,7 +24,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getUserInfo: bindActionCreators(actions.getUserInfo, dispatch)
+    getUserInfo: bindActionCreators(actions.getUserInfo, dispatch),
+    gotoPostGame,
+    setCurrentGame,
   };
 };
 
