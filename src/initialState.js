@@ -1,4 +1,4 @@
-import { generateActivities, generateUsers, generateRewards } from './utils/helpfulFunctions'
+import { generateActivities, generateFakeUsers, generateRewards } from './utils/helpfulFunctions'
 
 
 const allActivities = generateActivities();
@@ -32,7 +32,7 @@ const initialState = {
   users: {
 
     // list of all users on app
-    users: generateUsers(),
+    users: generateFakeUsers(),
 
     allActivities,
 
