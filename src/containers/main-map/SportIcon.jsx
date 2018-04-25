@@ -26,7 +26,7 @@ const SportIcon = (props) => {
       <Popup>
         <Grid container spacing={8}>
           <Grid item xs={12}>
-            <h2>{props.name} <i>({spotsLeft}/{props.playersNeeded})</i></h2>
+            <h2>{props.name} <i>({props.playerIds.length}/{props.playersNeeded})</i></h2>
             <Grid container spacing={0}>
               <Grid item xs={12}>
                 <b>Seeking:</b> {spotsLeft} players <i>(0 friends playing)</i>
