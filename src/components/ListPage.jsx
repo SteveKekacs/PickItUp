@@ -40,7 +40,10 @@ class ListPage extends React.Component {
     } else if (this.props.itemType === 'reward') {
       // TODO FILTERING
       return (
-        this.props.items.map((item) => (<RewardInline data={item} />))
+        this.props.items.filter((item) => (
+          (!this.state.searchTerm ||
+          (item.title + " " + item.description).toLowerCase().search(this.state.searchTerm.toLowerCase()) >= 0)
+        )).map((item) => (<RewardInline data={item} />))
       )
     } else if (this.props.itemType === 'activity') {
       return (
